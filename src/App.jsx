@@ -6,6 +6,7 @@ import KelasPage from "./pages/KelasPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import FaqPage from "./pages/FaqPage";
 import SyaratKetenPage from "./pages/SyaratKetenPage";
+import Scan from "./pages/Scan";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/testimonial" Component={TestimonialPage} />
         <Route path="/faq" Component={FaqPage} />
         <Route path="/syaratketen" Component={SyaratKetenPage} />
+        <Route path="/scan" Component={Scan} />
       </Routes>
       <FooterComponent />
     </div>

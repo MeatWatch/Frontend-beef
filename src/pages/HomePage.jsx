@@ -37,7 +37,7 @@ const HomePage = () => {
               </p>
               <button
                 className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2 animate__animated animate__fadeInUp animate__delay-1s"
-                onClick={() => navigate("/kelas")}
+                onClick={() => navigate("/scan")}
               >
                 Scan disini
               </button>
