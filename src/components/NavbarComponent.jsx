@@ -1,68 +1,109 @@
 import { useState, useEffect } from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
 import { navLinks } from "../data/index";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { IoMdExit } from "react-icons/io";
+import { useAuth } from "../context/AuthContext";
 
 const NavbarComponent = () => {
   const [changeColor, setChangeColor] = useState(false);
+  const { user, logout } = useAuth();
 
   const changeBackgroundColor = () => {
-    if (window.scrollY > 10) {
-      setChangeColor(true);
-    } else {
-      setChangeColor(false);
-    }
+    setChangeColor(window.scrollY > 10);
   };
 
   useEffect(() => {
-    changeBackgroundColor();
-
     window.addEventListener("scroll", changeBackgroundColor);
-  });
-  return (
-    <div>
-      <Navbar expand="lg" className={changeColor ? "color-active" : ""}>
-        <Container>
-          <Navbar.Brand href="/" className="fs-3 fw-bold">
-            <img
-              src="beef.svg"
-              alt="Logo"
-              width="25"
-              height="25"
-              className="d-inline-block align-center me-1"
-            />
-            Freshmeat.
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mx-auto text-center">
-              {navLinks.map((link) => {
-                return (
-                  <div className="nav-link" key={link.id}>
-                    <NavLink
-                      to={link.path}
-                      className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "active" : ""
-                      }
-                      end
-                    >
-                      {link.text}
-                    </NavLink>
-                  </div>
-                );
-              })}
-            </Nav>
+    return () => window.removeEventListener("scroll", changeBackgroundColor);
+  }, []);
 
-            <div className="text-center">
-              <button className="btn btn-outline-danger rounded-1 fw-bold">
-                Log Out <IoMdExit />
-              </button>
-            </div>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+  return (
+    <Navbar
+      expand="lg"
+      className={`${
+        changeColor ? "navbar-scrolled" : "navbar-transparent"
+      } bg-danger`}
+    >
+      <Container>
+        <Navbar.Brand as={Link} to="/" className="fs-3 fw-bold text-white">
+          <img
+            src="MeatWatch1(2).png"
+            alt="Logo"
+            width="25"
+            height="25"
+            className="d-inline-block align-center me-1"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
+          WatchMeat.
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="border-white"
+        />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto text-center">
+            {navLinks.map((link) => (
+              <div className="nav-link" key={link.id}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `text-white mx-3 ${isActive ? "active-link" : ""}`
+                  }
+                  end
+                >
+                  {link.text}
+                </NavLink>
+              </div>
+            ))}
+          </Nav>
+
+          <div className="text-center">
+            {user ? (
+              <NavDropdown
+                title={
+                  <span className="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-1">
+                    <Image
+                      src={user.avatar || "/default-avatar.png"}
+                      roundedCircle
+                      width="30"
+                      height="30"
+                      alt="User Avatar"
+                      style={{ objectFit: "cover" }}
+                    />
+                    <span className="text-white">{user.username}</span>
+                  </span>
+                }
+                id="user-dropdown"
+                align="end"
+                className="text-white"
+              >
+                <NavDropdown.Item as={Link} to="/scan">
+                  Scan
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/riwayat">
+                  Riwayat Scan
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/profil">
+                  Informasi Pengguna
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logout} className="text-danger">
+                  Log Out <IoMdExit />
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-light text-danger rounded-1 fw-bold"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

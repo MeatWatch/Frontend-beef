@@ -1,0 +1,265 @@
+{
+  "documentation": {
+    "base_url": "http://localhost:3001",
+    "endpoints": {
+      "users": {
+        "get_all_users": {
+          "method": "GET",
+          "path": "/users",
+          "description": "Get all users",
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "user_id": 1,
+                "username": "user1",
+                "email": "user1@example.com",
+                "profile_picture": "/profiles/user1.jpg",
+                "full_name": "user pertama",
+                "notification_enabled": true
+              },
+              {
+                "user_id": 2,
+                "username": "user2",
+                "email": "user2@example.com",
+                "profile_picture": null,
+                "full_name": "user kedua",
+                "notification_enabled": false
+              }
+            ]
+          }
+        },
+        "get_single_user": {
+          "method": "GET",
+          "path": "/users/:id",
+          "description": "Get user by ID",
+          "parameters": {
+            "id": "User ID (integer)"
+          },
+          "response": {
+            "status": 200,
+            "body": {
+              "user_id": 1,
+              "username": "user1",
+              "email": "user1@example.com",
+              "full_name": "user pertama",
+              "profile_picture": "/profiles/user1.jpg",
+              "notification_enabled": true,
+              "created_at": "2023-05-01T10:00:00Z",
+              "last_login": "2023-05-10T15:30:00Z"
+            }
+          }
+        },
+        "update_user": {
+          "method": "PATCH",
+          "path": "/users/:id",
+          "description": "Update user profile",
+          "request_body": {
+            "full_name": "string (optional)",
+            "profile_picture": "string (URL, optional)",
+            "notification_enabled": "boolean (optional)"
+          },
+          "response": {
+            "status": 200,
+            "body": {
+              "user_id": 1,
+              "updated_at": "2023-05-20T10:00:00Z",
+              "changes": {
+                "profile_picture": "/profiles/new-avatar.jpg"
+              }
+            }
+          }
+        }
+      },
+      "auth": {
+        "login": {
+          "method": "POST",
+          "path": "/login",
+          "description": "User login",
+          "request_body": {
+            "username": "string",
+            "password": "string"
+          },
+          "response": {
+            "status": 200,
+            "body": {
+              "token": "jwt.token.here",
+              "user": {
+                "user_id": 1,
+                "username": "user1",
+                "profile_picture": "/profiles/user1.jpg"
+              }
+            }
+          }
+        }
+      },
+      "classifications": {
+        "create_classification": {
+          "method": "POST",
+          "path": "/classifications",
+          "description": "Submit meat classification",
+          "request_body": {
+            "user_id": "integer",
+            "meat_type": "string (beef|chicken|fish)",
+            "image_path": "string (URL)",
+            "result": "string",
+            "confidence_score": "float"
+          },
+          "response": {
+            "status": 201,
+            "body": {
+              "classification_id": 3,
+              "user_id": 1,
+              "meat_type": "beef",
+              "image_path": "/uploads/beef_3.jpg",
+              "detection_date": "2023-05-20T14:30:00Z",
+              "reminder_active": "True/False",
+              "reminder_date": "xx",
+              "reminder_message": "xx",
+              "reminder_sent": "xx"
+            }
+          }
+        },
+        "get_user_classifications": {
+          "method": "GET",
+          "path": "/users/:id/classifications",
+          "description": "Get classifications by user ID",
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "classification_id": 1,
+                "user_id": 1,
+                "meat_type": "beef",
+                "image_path": "/uploads/beef_1.jpg",
+                "result": "fresh",
+                "confidence_score": 0.95,
+                "detection_date": "2023-05-10T10:30:00Z"
+              }
+            ]
+          }
+        }
+      },
+      "knowledge": {
+        "get_all_articles": {
+          "method": "GET",
+          "path": "/knowledge",
+          "description": "Get all knowledge articles with complete content",
+          "query_parameters": {
+            "category": "Optional filter (beef|chicken|fish|storage_tips|nutrition)"
+          },
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "article_id": 1,
+                "category": "beef",
+                "title": "Cara Menyimpan Daging Sapi dengan Benar",
+                "content": "Daging sapi segar sebaiknya disimpan dalam suhu 0-4°C...",
+                "thumbnail_path": "/thumbnails/beef_storage.jpg",
+                "author": "Admin",
+                "publish_date": "2023-01-15T08:00:00Z"
+              },
+              {
+                "article_id": 2,
+                "category": "chicken",
+                "title": "Nutrisi pada Daging Ayam",
+                "content": "Daging ayam kaya akan protein dan rendah lemak...",
+                "thumbnail_path": "/thumbnails/chicken_nutrition.jpg",
+                "author": "Nutrition Expert",
+                "publish_date": "2023-02-20T09:30:00Z"
+              },
+              {
+                "article_id": 3,
+                "category": "fish",
+                "title": "Cara Mengenali Ikan Segar",
+                "content": "Ikan segar memiliki mata jernih, insang merah cerah...",
+                "thumbnail_path": "/thumbnails/fresh_fish.jpg",
+                "author": "Seafood Specialist",
+                "publish_date": "2023-03-05T10:00:00Z"
+              },
+              {
+                "article_id": 4,
+                "category": "storage_tips",
+                "title": "Metode Penyimpanan Daging Terbaik",
+                "content": "Metode vacuum sealing dapat memperpanjang umur simpan daging...",
+                "thumbnail_path": "/thumbnails/vacuum_sealing.jpg",
+                "author": "Storage Guru",
+                "publish_date": "2023-04-12T07:45:00Z"
+              },
+              {
+                "article_id": 5,
+                "category": "nutrition",
+                "title": "Perbandingan Nutrisi Berbagai Jenis Daging",
+                "content": "Daging merah mengandung lebih banyak zat besi dibandingkan...",
+                "thumbnail_path": "/thumbnails/meat_nutrition.jpg",
+                "author": "Nutrition Expert",
+                "publish_date": "2023-01-10T08:30:00Z"
+              }
+            ]
+          }
+        },
+        "get_article_detail": {
+          "method": "GET",
+          "path": "/knowledge/:id",
+          "description": "Get detailed knowledge article",
+          "response": {
+            "status": 200,
+            "body": {
+              "article_id": 1,
+              "category": "beef",
+              "title": "Cara Menyimpan Daging Sapi dengan Benar",
+              "content": "Daging sapi segar sebaiknya disimpan dalam suhu 0-4°C...",
+              "thumbnail_path": "/thumbnails/beef_storage.jpg",
+              "author": "Admin",
+              "publish_date": "2023-01-15T08:00:00Z",
+              "updated_at": "2023-01-15T08:00:00Z"
+            }
+          }
+        }
+      },
+      "uploads": {
+        "upload_profile": {
+          "method": "POST",
+          "path": "/upload-profile",
+          "description": "Upload profile picture (max 2MB)",
+          "content_type": "multipart/form-data",
+          "request_body": {
+            "image": "File (JPEG/PNG)"
+          },
+          "response": {
+            "status": 201,
+            "body": {
+              "success": true,
+              "imagePath": "/uploads/profiles/user1-123.jpg",
+              "userId": 1
+            }
+          }
+        },
+        "upload_classification": {
+          "method": "POST",
+          "path": "/upload-classification",
+          "description": "Upload meat image for analysis (max 5MB)",
+          "content_type": "multipart/form-data",
+          "request_body": {
+            "image": "File (JPEG/PNG)",
+            "user_id": "integer",
+            "meat_type": "string (beef|chicken|fish)"
+          },
+          "response": {
+            "status": 201,
+            "body": {
+              "success": true,
+              "imagePath": "/uploads/classifications/beef-456.jpg",
+              "analysis": {
+                "result": "fresh",
+                "confidence": 0.92,
+                "message": "Daging terlihat segar dengan warna merah cerah"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

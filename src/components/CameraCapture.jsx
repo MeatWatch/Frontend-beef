@@ -213,7 +213,7 @@ const CameraCapture = () => {
             <Col xs={12} sm={6} md={4} lg={3}>
               <button
                 onClick={takePicture}
-                className="btn btn-primary w-100"
+                className="btn btn-danger w-100"
                 disabled={!isCameraActive}
               >
                 Ambil Gambar
@@ -221,16 +221,13 @@ const CameraCapture = () => {
             </Col>
 
             <Col xs={12} sm={6} md={4} lg={3}>
-              <button
-                onClick={toggleCamera}
-                className="btn btn-secondary w-100"
-              >
+              <button onClick={toggleCamera} className="btn btn-danger w-100">
                 {isCameraActive ? "Matikan Kamera" : "Nyalakan Kamera"}
               </button>
             </Col>
 
             <Col xs={12} sm={6} md={4} lg={3}>
-              <label className="btn btn-info w-100 mb-0">
+              <label className="btn btn-danger w-100 mb-0">
                 Unggah Gambar
                 <input
                   ref={fileInputRef}
