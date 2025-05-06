@@ -67,6 +67,10 @@ FRESHBEEF/
    # or
    pnpm install
    ```
+4. Menjalankan JSON server
+  ```sh
+  npx json-server --watch src/api/data.json --port 3001
+   ```
 
 ### **Running the App**  
 - **Development Mode** (Hot Reload):  
