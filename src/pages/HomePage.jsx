@@ -26,14 +26,15 @@ const HomePage = () => {
               <h1 className="mb-4 animate__animated animate__fadeInUp animate__delay-1s">
                 Temukan <br />
                 <span className="text-danger fw-bold">
-                  Daging Pilihanmu
+                  Kualitas Daging
                 </span>{" "}
                 <br />
                 Bersama Kami!
               </h1>
               <p className="mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
-                quae autem quos?{" "}
+                Meat Watch membantu Anda memastikan kesegaran daging melalui
+                analisis cerdas berbasis AI. Dapatkan hasil instan dan
+                rekomendasi penyimpanan optimal untuk konsumsi yang lebih aman.
               </p>
               <button
                 className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2 animate__animated animate__fadeInUp animate__delay-1s"
@@ -59,7 +60,7 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col>
-              <h1 className="text-center fw-bold">Beef List</h1>
+              <h1 className="text-center fw-bold">Information List</h1>
               <p className="text-center">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </p>

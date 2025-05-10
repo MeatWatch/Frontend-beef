@@ -259,6 +259,196 @@
             }
           }
         }
+      },
+      "reminders": {
+        "create_reminder": {
+          "method": "POST",
+          "path": "/classifications/:id/reminder",
+          "description": "Create expiration reminder for a classification",
+          "request_body": {
+            "reminder_date": "ISO8601 date",
+            "reminder_message": "string (optional)"
+          },
+          "response": {
+            "status": 201,
+            "body": {
+              "reminder_id": 1,
+              "classification_id": 3,
+              "reminder_date": "2023-05-27T14:30:00Z",
+              "reminder_message": "Daging sapi akan kadaluarsa dalam 2 hari",
+              "reminder_active": true
+            }
+          }
+        },
+        "update_reminder": {
+          "method": "PATCH",
+          "path": "/reminders/:id",
+          "description": "Update reminder settings",
+          "request_body": {
+            "reminder_date": "ISO8601 date (optional)",
+            "reminder_message": "string (optional)",
+            "reminder_active": "boolean (optional)"
+          },
+          "response": {
+            "status": 200,
+            "body": {
+              "reminder_id": 1,
+              "updated_at": "2023-05-21T10:00:00Z",
+              "changes": {
+                "reminder_date": "2023-05-28T14:30:00Z",
+                "reminder_active": false
+              }
+            }
+          }
+        },
+        "get_user_reminders": {
+          "method": "GET",
+          "path": "/users/:id/reminders",
+          "description": "Get all reminders for a user",
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "reminder_id": 1,
+                "classification_id": 3,
+                "meat_type": "beef",
+                "image_path": "/uploads/beef_3.jpg",
+                "reminder_date": "2023-05-27T14:30:00Z",
+                "reminder_message": "Daging sapi akan kadaluarsa dalam 2 hari",
+                "reminder_active": true,
+                "reminder_sent": false
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "get_user_stats": {
+          "method": "GET",
+          "path": "/users/:id/stats",
+          "description": "Get user statistics and insights",
+          "response": {
+            "status": 200,
+            "body": {
+              "total_classifications": 15,
+              "by_meat_type": {
+                "beef": 8,
+                "chicken": 5,
+                "fish": 2
+              },
+              "by_result": {
+                "fresh": 12,
+                "spoiled": 3
+              },
+              "avg_confidence": 0.89,
+              "most_common_issue": "Daging mulai berbau setelah 5 hari"
+            }
+          }
+        }
+      },
+      "feedback": {
+        "submit_feedback": {
+          "method": "POST",
+          "path": "/classifications/:id/feedback",
+          "description": "Submit feedback about classification accuracy",
+          "request_body": {
+            "was_accurate": "boolean",
+            "comments": "string (optional)"
+          },
+          "response": {
+            "status": 201,
+            "body": {
+              "feedback_id": 1,
+              "classification_id": 3,
+              "was_accurate": true,
+              "comments": "Hasil analisis sesuai dengan kondisi daging",
+              "submitted_at": "2023-05-21T14:30:00Z"
+            }
+          }
+        }
+      },
+      "notifications": {
+        "get_user_notifications": {
+          "method": "GET",
+          "path": "/users/:id/notifications",
+          "description": "Get user notifications",
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "notification_id": 1,
+                "user_id": 1,
+                "type": "reminder",
+                "title": "Pengingat Kadaluarsa Daging",
+                "message": "Daging sapi Anda akan kadaluarsa besok",
+                "is_read": false,
+                "created_at": "2023-05-26T08:00:00Z",
+                "related_classification_id": 3
+              }
+            ]
+          }
+        },
+        "mark_as_read": {
+          "method": "PATCH",
+          "path": "/notifications/:id/read",
+          "description": "Mark notification as read",
+          "response": {
+            "status": 200,
+            "body": {
+              "notification_id": 1,
+              "updated_at": "2023-05-26T08:05:00Z",
+              "is_read": true
+            }
+          }
+        }
+      },
+      "history": {
+        "get_user_history": {
+          "method": "GET",
+          "path": "/users/:id/history",
+          "description": "Get user activity history",
+          "query_parameters": {
+            "type": "Optional filter (classification|login|profile_update)",
+            "limit": "number (optional, default: 20)"
+          },
+          "response": {
+            "status": 200,
+            "body": [
+              {
+                "log_id": 1,
+                "user_id": 1,
+                "activity_type": "classification",
+                "description": "Mengklasifikasikan daging sapi",
+                "timestamp": "2023-05-20T14:30:00Z",
+                "related_data": {
+                  "classification_id": 3,
+                  "meat_type": "beef",
+                  "result": "fresh"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "system": {
+        "health_check": {
+          "method": "GET",
+          "path": "/health",
+          "description": "Check system health and status",
+          "response": {
+            "status": 200,
+            "body": {
+              "status": "healthy",
+              "timestamp": "2023-05-21T10:00:00Z",
+              "version": "1.2.0",
+              "services": {
+                "database": true,
+                "ml_model": true,
+                "storage": true
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
 import { navLinks } from "../data/index";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { IoMdExit } from "react-icons/io";
 import { useAuth } from "../context/AuthContext";
 
 const NavbarComponent = () => {
   const [changeColor, setChangeColor] = useState(false);
   const { user, logout } = useAuth();
+  const location = useLocation();
 
   const changeBackgroundColor = () => {
     setChangeColor(window.scrollY > 10);
@@ -35,7 +36,7 @@ const NavbarComponent = () => {
             className="d-inline-block align-center me-1"
             style={{ filter: "brightness(0) invert(1)" }}
           />
-          WatchMeat.
+          MeatWatch.
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
@@ -48,7 +49,13 @@ const NavbarComponent = () => {
                 <NavLink
                   to={link.path}
                   className={({ isActive }) =>
-                    `text-white mx-3 ${isActive ? "active-link" : ""}`
+                    `text-white mx-3 px-3 py-2 rounded ${
+                      isActive ? "active-nav-link" : ""
+                    } ${
+                      location.pathname === "/" && link.path === ""
+                        ? "home-hover"
+                        : ""
+                    }`
                   }
                   end
                 >

@@ -14,7 +14,7 @@
 
 .navbar {
   position: fixed;
-  padding: 15px 0;
+  padding: 8px 0;
   width: 100%;
   transition: all 0.3s ease;
   z-index: 9999;
@@ -25,7 +25,7 @@
 
 .navbar.color-active {
   background-color: var(--navbar-color);
-  padding: 12px 0;
+  padding: 10px 0;
   backdrop-filter: blur(5px);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
@@ -68,15 +68,78 @@
   background-color: white;
 }
 
-.navbar .nav-link {
+/* .navbar .nav-link {
   transition: background-color 0.3s, color 0.3s;
   padding: 6px 12px;
   border-radius: 8px;
+} */
+
+/* Navbar Styles */
+/* .navbar {
+  position: fixed;
+  padding: 15px 0;
+  width: 100%;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  background-color: rgba(220, 53, 69, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+} */
+
+.navbar-scrolled {
+  background-color: rgba(220, 53, 69, 0.95) !important;
+  padding: 12px 0;
+  backdrop-filter: blur(5px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.navbar .nav-link:hover {
-  background-color: #ff6b6b; /* Merah terang saat hover */
-  color: white !important; /* Teks tetap putih saat hover */
+/* Nav Link Styles */
+.nav-link a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* General Hover Effect */
+.nav-link a:not(.active-nav-link):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Active Link Style */
+.nav-link .active-nav-link {
+  background-color: white !important;
+  color: #dc3545 !important;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* User Dropdown Styles */
+.nav-dropdown .dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #dc3545;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: rgba(220, 53, 69, 0.98);
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    margin-top: 10px;
+  }
+
+  .nav-link {
+    margin: 5px 0;
+  }
+
+  .nav-link a {
+    display: block;
+    padding: 10px 15px;
+  }
 }
 
 /* Mobile menu toggle */
@@ -848,3 +911,38 @@ header {
 .form-input {
   padding-left: 35px !important;
 }
+
+/* Profile User */
+.profile-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.avatar-upload {
+  transition: all 0.3s ease;
+}
+
+.avatar-upload:hover {
+  opacity: 0.8;
+}
+/* profile user */
+
+/* CSS fori About us */
+.hero-section {
+  background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
+  padding: 80px 0;
+}
+
+.about-us-page {
+  background-color: #f8f9fa;
+}
+
+.content-section {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-top: -50px;
+  position: relative;
+  z-index: 1;
+}
+/* CSS fori About us */

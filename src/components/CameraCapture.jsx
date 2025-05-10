@@ -1,11 +1,12 @@
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner, Form } from "react-bootstrap";
 import React, { useRef, useEffect, useState, useCallback } from "react";
+import axios from "axios";
 
 const CameraCapture = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
-  const fileInputRef = useRef(null); // Menambahkan ref untuk input file
+  const fileInputRef = useRef(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [devices, setDevices] = useState([]);
   const [selectedDeviceId, setSelectedDeviceId] = useState("");
@@ -13,6 +14,10 @@ const CameraCapture = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [fileImage, setFileImage] = useState(null);
   const [submittedImage, setSubmittedImage] = useState(null);
+  const [meatType, setMeatType] = useState("beef");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [classificationResult, setClassificationResult] = useState(null);
+  const [error, setError] = useState(null);
 
   const startCamera = useCallback(async () => {
     try {
@@ -93,6 +98,10 @@ const CameraCapture = () => {
       context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
       const imageData = canvas.toDataURL("image/png");
       setCapturedImage(imageData);
+      setFileImage(null); // Clear file image if exists
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     }
   };
 
@@ -114,6 +123,7 @@ const CameraCapture = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setFileImage(reader.result);
+        setCapturedImage(null); // Clear camera image if exists
       };
       reader.readAsDataURL(file);
     } else {
@@ -124,24 +134,55 @@ const CameraCapture = () => {
   const handleDeleteImage = () => {
     setCapturedImage(null);
     setFileImage(null);
+    setClassificationResult(null);
+    setError(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = ""; // Reset input file
+      fileInputRef.current.value = "";
     }
   };
 
-  const handleSubmitImage = () => {
+  const handleSubmitImage = async () => {
     const imageToSubmit = capturedImage || fileImage;
     if (!imageToSubmit) {
       alert("Tidak ada gambar yang dipilih atau diambil.");
       return;
     }
 
-    // Contoh kirim ke server (gunakan fetch atau axios jika perlu)
-    // Simpan ke state dulu sebagai simulasi submit
-    setSubmittedImage(imageToSubmit);
+    if (!meatType) {
+      alert("Silakan pilih jenis daging terlebih dahulu.");
+      return;
+    }
 
-    console.log("Gambar dikirim:", imageToSubmit);
-    alert("Gambar berhasil dikirim!");
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Convert data URL to blob
+      const blob = await fetch(imageToSubmit).then((r) => r.blob());
+      const formData = new FormData();
+      formData.append("image", blob, "meat-image.jpg");
+      formData.append("meat_type", meatType);
+      formData.append("user_id", 1); // Replace with actual user ID from auth
+
+      const response = await axios.post(
+        "http://localhost:3001/upload-classification",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setClassificationResult(response.data);
+      setSubmittedImage(imageToSubmit);
+      console.log("Classification result:", response.data);
+    } catch (err) {
+      console.error("Error submitting image:", err);
+      setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -192,6 +233,19 @@ const CameraCapture = () => {
               backgroundColor: "#000",
             }}
           >
+            {!isCameraActive && !(capturedImage || fileImage) && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                }}
+              >
+                Kamera tidak aktif atau belum ada gambar
+              </div>
+            )}
             <video
               ref={videoRef}
               autoPlay
@@ -203,64 +257,14 @@ const CameraCapture = () => {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
+                display: isCameraActive ? "block" : "none",
               }}
             />
           </div>
         </Col>
 
-        <Col className="text-center mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-          <Row className="gx-3 gy-2 justify-content-center">
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <button
-                onClick={takePicture}
-                className="btn btn-danger w-100"
-                disabled={!isCameraActive}
-              >
-                Ambil Gambar
-              </button>
-            </Col>
-
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <button onClick={toggleCamera} className="btn btn-danger w-100">
-                {isCameraActive ? "Matikan Kamera" : "Nyalakan Kamera"}
-              </button>
-            </Col>
-
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <label className="btn btn-danger w-100 mb-0">
-                Unggah Gambar
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  style={{ display: "none" }}
-                />
-              </label>
-            </Col>
-
-            {/* {(capturedImage || fileImage) && (
-              <Col xs={12} sm={6} md={4} lg={3}>
-                <button
-                  onClick={handleSubmitImage}
-                  className="btn btn-success w-100"
-                >
-                  Submit Gambar
-                </button>
-              </Col>
-            )} */}
-          </Row>
-        </Col>
-
-        <canvas
-          ref={canvasRef}
-          style={{ display: "none" }}
-          width={640}
-          height={480}
-        />
-
         {(capturedImage || fileImage) && (
-          <Col md={12} className="text-center">
+          <Col md={12} className="text-center mb-3">
             <h5>Hasil Gambar:</h5>
             <img
               src={capturedImage || fileImage}
@@ -276,16 +280,124 @@ const CameraCapture = () => {
             <p className="mt-2">Klik gambar untuk menghapusnya.</p>
           </Col>
         )}
-        {(capturedImage || fileImage) && (
-          <Col>
-            <button
-              onClick={handleSubmitImage}
-              className="btn btn-success w-100"
+
+        <Col md={12} className="mb-3">
+          <Form.Group controlId="meatTypeSelect">
+            <Form.Label>Pilih Jenis Daging:</Form.Label>
+            <Form.Select
+              value={meatType}
+              onChange={(e) => setMeatType(e.target.value)}
+              disabled={isSubmitting}
             >
-              Submit Gambar
-            </button>
+              <option value="beef">Daging Sapi</option>
+              <option value="lamb">Daging Kambing</option>
+              <option value="chicken">Daging Ayam</option>
+              <option value="fish">Daging Ikan</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
+
+        <Col className="text-center mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+          <Row className="gx-3 gy-2 justify-content-center">
+            <Col xs={12} sm={6} md={4} lg={3}>
+              <button
+                onClick={takePicture}
+                className="btn btn-danger w-100"
+                disabled={!isCameraActive || isSubmitting}
+              >
+                Ambil Gambar
+              </button>
+            </Col>
+
+            <Col xs={12} sm={6} md={4} lg={3}>
+              <button
+                onClick={toggleCamera}
+                className="btn btn-danger w-100"
+                disabled={isSubmitting}
+              >
+                {isCameraActive ? "Matikan Kamera" : "Nyalakan Kamera"}
+              </button>
+            </Col>
+
+            <Col xs={12} sm={6} md={4} lg={3}>
+              <label
+                className="btn btn-danger w-100 mb-0"
+                style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
+              >
+                Unggah Gambar
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                  disabled={isSubmitting}
+                />
+              </label>
+            </Col>
+
+            {(capturedImage || fileImage) && (
+              <Col xs={12} sm={6} md={4} lg={3}>
+                <button
+                  onClick={handleSubmitImage}
+                  className="btn btn-danger w-100"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      <span className="ms-2">Memproses...</span>
+                    </>
+                  ) : (
+                    "Analisis Gambar"
+                  )}
+                </button>
+              </Col>
+            )}
+          </Row>
+        </Col>
+
+        {error && (
+          <Col md={12} className="text-center text-danger mb-3">
+            {error}
           </Col>
         )}
+
+        {classificationResult && (
+          <Col md={12} className="text-center mb-4">
+            <div className="p-3 border rounded bg-light">
+              <h4>Hasil Analisis:</h4>
+              <p className="fs-5">
+                Status: <strong>{classificationResult.analysis.result}</strong>
+              </p>
+              <p className="fs-5">
+                Tingkat Kepercayaan:{" "}
+                <strong>
+                  {(classificationResult.analysis.confidence * 100).toFixed(2)}%
+                </strong>
+              </p>
+              <p className="fs-6">{classificationResult.analysis.message}</p>
+              <img
+                src={classificationResult.imagePath}
+                alt="Analyzed meat"
+                style={{ maxWidth: "300px", marginTop: "15px" }}
+              />
+            </div>
+          </Col>
+        )}
+
+        <canvas
+          ref={canvasRef}
+          style={{ display: "none" }}
+          width={640}
+          height={480}
+        />
       </Row>
     </Container>
   );

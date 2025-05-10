@@ -35,8 +35,8 @@ export const navLinks = [
   },
   {
     id: 5,
-    path: "syaratketen",
-    text: "Syarat & Ketentuan",
+    path: "aboutus",
+    text: "About Us",
   },
 ];
 
@@ -370,5 +370,147 @@ export const faq = [
     eventKey: 7,
     title: "Apakah Bisa Ganti Jenis Pemeriksaan Setelah Memilih?",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+  },
+];
+
+// NEW DATA: Team Members
+export const teamMembers = [
+  {
+    id: 1,
+    name: "Elvino Junior",
+    role: "Founder & CEO",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  {
+    id: 2,
+    name: "Robby Saidi",
+    role: "Machine Learning",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  {
+    id: 3,
+    name: "Muhammad Firdaus",
+    role: "Machine Learning",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  {
+    id: 4,
+    name: "Syuhada Aqlul Hafiz",
+    role: "Fullstack Developer",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  {
+    id: 5,
+    name: "Fahrul Alamsyah ",
+    role: "Fullstack Developer",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  {
+    id: 6,
+    name: "Agung Purnomo",
+    role: "Fullstack Developer",
+    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    image: People3,
+  },
+  // ... (add 5 more team members)
+];
+
+// NEW DATA: Meat Watch Information
+export const meatWatchInfo = {
+  about:
+    "Meat Watch adalah platform inovatif untuk memeriksa kualitas daging secara real-time menggunakan teknologi pemindaian canggih. Kami berkomitmen untuk memberikan solusi praktis dalam memastikan keamanan pangan. Proyek MeatWatch mengembangkan platform web berbasis machine learning untuk mendeteksi kesegaran daging sapi, ayam, dan ikan melalui gambar digital. Platform kami membantu konsumen mengenali indikator kesegaran daging secara akurat dan menyediakan solusi lengkap untuk keamanan pangan.",
+
+  features: [
+    "Deteksi kesegaran daging (sapi, kambing, ayam, ikan) berbasis AI",
+    "Pemindaian kualitas daging instan melalui gambar digital",
+    "Edukasi nutrisi daging dan indikator kesegaran",
+    "Panduan penyimpanan optimal untuk berbagai jenis daging",
+    "Fitur pengingat masa simpan dan kedaluwarsa",
+    "Riwayat pemeriksaan otomatis dan rekomendasi",
+    "Komunitas pecinta kuliner dan sharing pengetahuan",
+  ],
+
+  howToUse: [
+    "Buka aplikasi Meat Watch",
+    "Pilih jenis daging yang akan diperiksa (sapi/kambing/ayam/ikan)",
+    "Ambil foto daging atau upload gambar",
+    "Tunggu proses analisis machine learning",
+    "Dapatkan hasil deteksi kesegaran lengkap",
+    "Simpan hasil scan untuk pelacakan riwayat",
+    "Ikuti rekomendasi penyimpanan dan konsumsi",
+  ],
+};
+
+// NEW DATA: Meat Quality Indicators
+export const qualityIndicators = [
+  {
+    type: "Beef",
+    indicators: [
+      "Warna merah cerah (tidak kecoklatan)",
+      "Tekstur kenyal saat ditekan",
+      "Aroma segar (tidak berbau asam)",
+      "Lemak berwarna krem (tidak kuning)",
+    ],
+  },
+  {
+    type: "Chicken",
+    indicators: [
+      "Warna putih hingga kekuningan pucat",
+      "Tekstur lembab (tidak berlendir)",
+      "Kulit utuh tanpa memar",
+      "Aroma segar (tidak berbau anyir)",
+    ],
+  },
+  {
+    type: "Goat",
+    indicators: [
+      "Warna merah muda hingga merah cerah",
+      "Tekstur padat dan kenyal",
+      "Aroma khas daging kambing (tidak menyengat atau busuk)",
+      "Lemak putih bersih, tidak berbau tengik",
+    ],
+  },
+  {
+    type: "Fish",
+    indicators: [
+      "Mata jernih dan menonjol (tidak keruh atau cekung)",
+      "Sisik mengkilap dan tidak mudah lepas",
+      "Insang berwarna merah segar (bukan kecoklatan)",
+      "Aroma segar laut (tidak amis menyengat)",
+      "Daging kenyal dan kembali saat ditekan",
+    ],
+  },
+];
+
+// NEW DATA: Storage Guidelines
+export const storageGuidelines = [
+  {
+    meatType: "Fresh Beef",
+    fridge: "2-4°C (3-5 hari)",
+    freezer: "-18°C (6-12 bulan)",
+    tips: "Simpan dalam wadah kedap udara",
+  },
+  {
+    meatType: "Fresh Chicken",
+    fridge: "2-4°C (1-2 hari)",
+    freezer: "-18°C (9-12 bulan)",
+    tips: "Buang kemasan asli sebelum menyimpan",
+  },
+  {
+    meatType: "Fresh Goat Meat",
+    fridge: "2-4°C (2-3 hari)",
+    freezer: "-18°C (6-9 bulan)",
+    tips: "Potong sesuai porsi masak sebelum dibekukan",
+  },
+  {
+    meatType: "Fresh Fish",
+    fridge: "2-4°C (1-2 hari)",
+    freezer: "-18°C (2-3 bulan)",
+    tips: "Cuci bersih dan simpan dalam plastik vakum",
   },
 ];

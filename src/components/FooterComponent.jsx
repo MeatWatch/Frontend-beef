@@ -16,7 +16,7 @@ const FooterComponent = () => {
                 className="d-inline-block align-center me-1"
                 style={{ filter: "brightness(0) invert(1)" }}
               />
-              WatchMeat.
+              MeatWatch.
             </h3>
             <p className="desc text-white-80">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -40,7 +40,7 @@ const FooterComponent = () => {
               Home
             </Link>
             <Link to="kelas" className="text-white-90 mb-2">
-              Kelas
+              List
             </Link>
             <Link to="testimonial" className="text-white-90 mb-2">
               Testimonial
@@ -49,7 +49,7 @@ const FooterComponent = () => {
               FAQ
             </Link>
             <Link to="syaratketen" className="text-white-90">
-              Syarat & Ketentuan
+              About Us
             </Link>
           </Col>
           <Col lg="4" className="mt-lg-0 mt-5">
@@ -79,7 +79,7 @@ const FooterComponent = () => {
           <Col>
             <p className="text-center text-white-80">
               &copy; Copyright {new Date().getFullYear()} by{" "}
-              <span className="fw-bold text-white">FreshMeat</span>, All Right
+              <span className="fw-bold text-white">MeatWatch</span>, All Right
               Reserved
             </p>
           </Col>

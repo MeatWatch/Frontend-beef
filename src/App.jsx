@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import KelasPage from "./pages/KelasPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import FaqPage from "./pages/FaqPage";
-import SyaratKetenPage from "./pages/SyaratKetenPage";
+import AboutUsPage from "./pages/AboutUs";
 import Scan from "./pages/Scan";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
@@ -28,7 +28,7 @@ function App() {
           <Route path="/kelas" element={<KelasPage />} />
           <Route path="/testimonial" element={<TestimonialPage />} />
           <Route path="/faq" element={<FaqPage />} />
-          <Route path="/syaratketen" element={<SyaratKetenPage />} />
+          <Route path="/aboutus" element={<AboutUsPage />} />
 
           {/* Proteksi rute scan hanya untuk yang sudah login */}
           <Route

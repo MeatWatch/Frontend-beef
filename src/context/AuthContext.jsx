@@ -22,6 +22,48 @@ export const AuthProvider = ({ children }) => {
     setInitialized(true);
   }, []);
 
+  const updateUser = async (updatedData) => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Get all users from localStorage
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Find current user index
+      const userIndex = users.findIndex((u) => u.id === user.id);
+
+      if (userIndex === -1) {
+        throw new Error("User not found");
+      }
+
+      // Update user data
+      const updatedUser = {
+        ...users[userIndex],
+        ...updatedData,
+        updatedAt: new Date().toISOString(),
+      };
+
+      // Update users array
+      users[userIndex] = updatedUser;
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // Update current user in state and localStorage (without password)
+      const { password, ...safeUser } = updatedUser;
+      setUser(safeUser);
+      localStorage.setItem("currentUser", JSON.stringify(safeUser));
+
+      return { success: true, user: safeUser };
+    } catch (err) {
+      setError(err.message);
+      return { success: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const login = async (credentials) => {
     setLoading(true);
     setError(null);
@@ -81,13 +123,16 @@ export const AuthProvider = ({ children }) => {
         throw new Error("Email already registered");
       }
 
-      // Create new user
+      // Create new user with additional fields
       const newUser = {
         id: Date.now().toString(),
         username: userData.username,
         email: userData.email,
+        phone: userData.phone || "",
+        address: userData.address || "",
         password: userData.password, // Note: In real app, hash this password
         createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
       // Update storage
@@ -113,7 +158,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
   };
 
-  // Optional: Clear error after some time
+  // Clear error after some time
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(null), 5000);
@@ -127,11 +172,12 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         error,
-        initialized, // Useful for checking if auth state is loaded
+        initialized,
         isAuthenticated: !!user,
         login,
         logout,
         register,
+        updateUser, // Now included in the context
       }}
     >
       {children}
