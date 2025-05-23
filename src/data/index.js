@@ -21,12 +21,12 @@ export const navLinks = [
   {
     id: 2,
     path: "kelas",
-    text: "List",
+    text: "Information",
   },
   {
     id: 3,
     path: "testimonial",
-    text: "Testimonial",
+    text: "Knowledge",
   },
   {
     id: 4,
@@ -211,72 +211,6 @@ export const kelasTerbaru = [
   },
 ];
 
-export const testimonial = [
-  {
-    id: 1,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
-    name: "People 1",
-    skill: "UI UX Designer",
-  },
-  {
-    id: 2,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People2,
-    name: "People 2",
-    skill: "Flutter Developer",
-  },
-  {
-    id: 3,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
-    name: "People 3",
-    skill: "Web Developer",
-  },
-  {
-    id: 4,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
-    name: "People 4",
-    skill: "UI UX Designer",
-  },
-  {
-    id: 5,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People2,
-    name: "People 5",
-    skill: "Flutter Developer",
-  },
-  {
-    id: 6,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
-    name: "People 6",
-    skill: "Web Developer",
-  },
-  {
-    id: 7,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
-    name: "People 7",
-    skill: "UI UX Designer",
-  },
-  {
-    id: 8,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People2,
-    name: "People 8",
-    skill: "Flutter Developer",
-  },
-  {
-    id: 9,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
-    name: "People 9",
-    skill: "Web Developer",
-  },
-];
-
 export const dataSwiper = [
   {
     id: 1,
@@ -379,43 +313,73 @@ export const teamMembers = [
     id: 1,
     name: "Elvino Junior",
     role: "Founder & CEO",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   {
     id: 2,
     name: "Robby Saidi",
     role: "Machine Learning",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   {
     id: 3,
     name: "Muhammad Firdaus",
     role: "Machine Learning",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   {
     id: 4,
     name: "Syuhada Aqlul Hafiz",
     role: "Fullstack Developer",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   {
     id: 5,
     name: "Fahrul Alamsyah ",
     role: "Fullstack Developer",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   {
     id: 6,
     name: "Agung Purnomo",
     role: "Fullstack Developer",
-    bio: "Pengembang utama dengan pengalaman 5 tahun di bidang teknologi pangan.",
+    bio: "Universitas Indraprasta PGRI",
     image: People3,
+    socialMedia: [
+      { platform: "linkedin", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "github", url: "#" },
+    ],
   },
   // ... (add 5 more team members)
 ];
@@ -426,7 +390,7 @@ export const meatWatchInfo = {
     "Meat Watch adalah platform inovatif untuk memeriksa kualitas daging secara real-time menggunakan teknologi pemindaian canggih. Kami berkomitmen untuk memberikan solusi praktis dalam memastikan keamanan pangan. Proyek MeatWatch mengembangkan platform web berbasis machine learning untuk mendeteksi kesegaran daging sapi, ayam, dan ikan melalui gambar digital. Platform kami membantu konsumen mengenali indikator kesegaran daging secara akurat dan menyediakan solusi lengkap untuk keamanan pangan.",
 
   features: [
-    "Deteksi kesegaran daging (sapi, kambing, ayam, ikan) berbasis AI",
+    "Deteksi kesegaran daging (sapi, ayam, ikan) berbasis AI",
     "Pemindaian kualitas daging instan melalui gambar digital",
     "Edukasi nutrisi daging dan indikator kesegaran",
     "Panduan penyimpanan optimal untuk berbagai jenis daging",
@@ -437,7 +401,7 @@ export const meatWatchInfo = {
 
   howToUse: [
     "Buka aplikasi Meat Watch",
-    "Pilih jenis daging yang akan diperiksa (sapi/kambing/ayam/ikan)",
+    "Pilih jenis daging yang akan diperiksa (sapi/ayam/ikan)",
     "Ambil foto daging atau upload gambar",
     "Tunggu proses analisis machine learning",
     "Dapatkan hasil deteksi kesegaran lengkap",
@@ -467,15 +431,6 @@ export const qualityIndicators = [
     ],
   },
   {
-    type: "Goat",
-    indicators: [
-      "Warna merah muda hingga merah cerah",
-      "Tekstur padat dan kenyal",
-      "Aroma khas daging kambing (tidak menyengat atau busuk)",
-      "Lemak putih bersih, tidak berbau tengik",
-    ],
-  },
-  {
     type: "Fish",
     indicators: [
       "Mata jernih dan menonjol (tidak keruh atau cekung)",
@@ -483,6 +438,15 @@ export const qualityIndicators = [
       "Insang berwarna merah segar (bukan kecoklatan)",
       "Aroma segar laut (tidak amis menyengat)",
       "Daging kenyal dan kembali saat ditekan",
+    ],
+  },
+  {
+    type: "Processed Meat",
+    indicators: [
+      "Warna merata sesuai jenis (tidak pucat atau terlalu gelap)",
+      "Tidak berlendir atau lengket",
+      "Kemasan utuh dan tidak menggembung",
+      "Aroma normal, tidak asam atau tengik",
     ],
   },
 ];
@@ -501,16 +465,17 @@ export const storageGuidelines = [
     freezer: "-18°C (9-12 bulan)",
     tips: "Buang kemasan asli sebelum menyimpan",
   },
-  {
-    meatType: "Fresh Goat Meat",
-    fridge: "2-4°C (2-3 hari)",
-    freezer: "-18°C (6-9 bulan)",
-    tips: "Potong sesuai porsi masak sebelum dibekukan",
-  },
+
   {
     meatType: "Fresh Fish",
     fridge: "2-4°C (1-2 hari)",
     freezer: "-18°C (2-3 bulan)",
     tips: "Cuci bersih dan simpan dalam plastik vakum",
+  },
+  {
+    meatType: "Processed Meat",
+    fridge: "2-4°C (3-7 hari tergantung jenis)",
+    freezer: "-18°C (1-2 bulan untuk kualitas terbaik)",
+    tips: "Jangan buka kemasan sebelum digunakan, simpan dalam kemasan aslinya atau vakum",
   },
 ];

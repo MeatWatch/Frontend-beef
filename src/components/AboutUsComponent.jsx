@@ -1,10 +1,6 @@
+// components/AboutUsComponent.js
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
-import {
-  teamMembers,
-  meatWatchInfo,
-  qualityIndicators,
-  storageGuidelines,
-} from "../data/index";
+import { teamMembers, meatWatchInfo } from "../data/index";
 import "animate.css";
 
 const AboutUsComponent = () => {
@@ -141,72 +137,32 @@ const AboutUsComponent = () => {
                       <Card.Text className="animate__animated animate__fadeIn animate__delay-2s">
                         {member.bio}
                       </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
 
-        {/* Quality Indicators Section */}
-        <Row className="mb-5 animate__animated animate__fadeIn">
-          <Col>
-            <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
-              Indikator Kualitas Daging
-            </h2>
-            <Row className="g-4">
-              {qualityIndicators.map((indicator, index) => (
-                <Col
-                  key={index}
-                  md={6}
-                  className="animate__animated animate__fadeInUp animate__delay-1s"
-                >
-                  <Card className="h-100 shadow-sm border-0 animate__animated animate__flipInX">
-                    <Card.Header className="bg-danger text-white">
-                      <h5 className="mb-0">{indicator.type}</h5>
-                    </Card.Header>
-                    <Card.Body>
-                      <ul className="animate__animated animate__fadeIn animate__delay-1s">
-                        {indicator.indicators.map((item, i) => (
-                          <li key={i}>{item}</li>
+                      {/* Social Media Icons */}
+                      <div className="d-flex justify-content-center gap-2 mt-3">
+                        {member.socialMedia?.map((social, i) => (
+                          <a
+                            key={i}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            {social.platform === "linkedin" && (
+                              <i className="fab fa-linkedin fs-4 text-primary"></i>
+                            )}
+                            {social.platform === "instagram" && (
+                              <i className="fab fa-instagram fs-4 text-danger"></i>
+                            )}
+                            {social.platform === "github" && (
+                              <i className="fab fa-github fs-4 text-dark"></i>
+                            )}
+                            {social.platform === "twitter" && (
+                              <i className="fab fa-twitter fs-4 text-info"></i>
+                            )}
+                          </a>
                         ))}
-                      </ul>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
-
-        {/* Storage Guidelines Section */}
-        <Row className="animate__animated animate__fadeIn">
-          <Col>
-            <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
-              Panduan Penyimpanan
-            </h2>
-            <Row className="g-4">
-              {storageGuidelines.map((guide, index) => (
-                <Col
-                  key={index}
-                  md={6}
-                  className="animate__animated animate__fadeInUp animate__delay-1s"
-                >
-                  <Card className="h-100 shadow-sm border-0 animate__animated animate__flipInY">
-                    <Card.Header className="bg-danger text-white">
-                      <h5 className="mb-0">{guide.meatType}</h5>
-                    </Card.Header>
-                    <Card.Body className="animate__animated animate__fadeIn animate__delay-1s">
-                      <p>
-                        <strong>Kulkas:</strong> {guide.fridge}
-                      </p>
-                      <p>
-                        <strong>Freezer:</strong> {guide.freezer}
-                      </p>
-                      <p>
-                        <strong>Tips:</strong> {guide.tips}
-                      </p>
+                      </div>
                     </Card.Body>
                   </Card>
                 </Col>

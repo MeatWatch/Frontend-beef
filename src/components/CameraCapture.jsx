@@ -1,6 +1,8 @@
 import { Container, Row, Col, Spinner, Form } from "react-bootstrap";
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+import { mockApi } from "../api/mockApi"; // Import mock API functions
 
 const CameraCapture = () => {
   const videoRef = useRef(null);
@@ -18,6 +20,8 @@ const CameraCapture = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [classificationResult, setClassificationResult] = useState(null);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const startCamera = useCallback(async () => {
     try {
@@ -141,6 +145,50 @@ const CameraCapture = () => {
     }
   };
 
+  // const handleSubmitImage = async () => {
+  //   const imageToSubmit = capturedImage || fileImage;
+  //   if (!imageToSubmit) {
+  //     alert("Tidak ada gambar yang dipilih atau diambil.");
+  //     return;
+  //   }
+
+  //   if (!meatType) {
+  //     alert("Silakan pilih jenis daging terlebih dahulu.");
+  //     return;
+  //   }
+
+  //   setIsSubmitting(true);
+  //   setError(null);
+
+  //   try {
+  //     // Convert data URL to blob
+  //     const blob = await fetch(imageToSubmit).then((r) => r.blob());
+  //     const formData = new FormData();
+  //     formData.append("image", blob, "meat-image.jpg");
+  //     formData.append("meat_type", meatType);
+  //     formData.append("user_id", 1); // Replace with actual user ID from auth
+
+  //     const response = await axios.post(
+  //       "http://localhost:3001/upload-classification",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+
+  //     setClassificationResult(response.data);
+  //     setSubmittedImage(imageToSubmit);
+  //     console.log("Classification result:", response.data);
+  //   } catch (err) {
+  //     console.error("Error submitting image:", err);
+  //     setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmitImage = async () => {
     const imageToSubmit = capturedImage || fileImage;
     if (!imageToSubmit) {
@@ -157,6 +205,25 @@ const CameraCapture = () => {
     setError(null);
 
     try {
+      // ======================================================
+      // LOCAL MOCK MODE - comment this block when using server
+      // Convert data URL to blob for consistent interface
+      const blob = await fetch(imageToSubmit).then((r) => r.blob());
+      const formData = new FormData();
+      formData.append("image", blob, "meat-image.jpg");
+      formData.append("meat_type", meatType);
+      formData.append("user_id", 1);
+
+      // Use mock API instead of real API call
+      const mockResult = await mockApi.classifyMeat(formData);
+      setClassificationResult(mockResult);
+      setSubmittedImage(imageToSubmit);
+      console.log("Mock classification result:", mockResult);
+      // ======================================================
+
+      // ======================================================
+      // SERVER MODE - uncomment this block when using real server
+      /*
       // Convert data URL to blob
       const blob = await fetch(imageToSubmit).then((r) => r.blob());
       const formData = new FormData();
@@ -177,6 +244,8 @@ const CameraCapture = () => {
       setClassificationResult(response.data);
       setSubmittedImage(imageToSubmit);
       console.log("Classification result:", response.data);
+      */
+      // ======================================================
     } catch (err) {
       console.error("Error submitting image:", err);
       setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
@@ -290,7 +359,6 @@ const CameraCapture = () => {
               disabled={isSubmitting}
             >
               <option value="beef">Daging Sapi</option>
-              <option value="lamb">Daging Kambing</option>
               <option value="chicken">Daging Ayam</option>
               <option value="fish">Daging Ikan</option>
             </Form.Select>
@@ -371,10 +439,25 @@ const CameraCapture = () => {
 
         {classificationResult && (
           <Col md={12} className="text-center mb-4">
-            <div className="p-3 border rounded bg-light">
+            <div
+              className={`p-3 border rounded ${
+                classificationResult.analysis.result === "Fresh"
+                  ? "bg-light"
+                  : "bg-danger bg-opacity-10"
+              }`}
+            >
               <h4>Hasil Analisis:</h4>
               <p className="fs-5">
-                Status: <strong>{classificationResult.analysis.result}</strong>
+                Status:{" "}
+                <strong
+                  className={
+                    classificationResult.analysis.result === "Fresh"
+                      ? "text-success"
+                      : "text-danger"
+                  }
+                >
+                  {classificationResult.analysis.result}
+                </strong>
               </p>
               <p className="fs-5">
                 Tingkat Kepercayaan:{" "}
@@ -384,11 +467,31 @@ const CameraCapture = () => {
               </p>
               <p className="fs-6">{classificationResult.analysis.message}</p>
               <img
-                src={classificationResult.imagePath}
-                alt="Analyzed meat"
+                src={
+                  classificationResult.analysis.result === "Fresh"
+                    ? "/image/success.png"
+                    : "/image/warning.png"
+                }
+                alt={
+                  classificationResult.analysis.result === "Fresh"
+                    ? "Fresh meat"
+                    : "Not fresh meat"
+                }
                 style={{ maxWidth: "300px", marginTop: "15px" }}
               />
+              {classificationResult.analysis.result !== "Fresh" && (
+                <div className="mt-3 alert alert-danger">
+                  <strong>Peringatan!</strong> Daging terindikasi tidak segar,
+                  disarankan untuk tidak dikonsumsi.
+                </div>
+              )}
             </div>
+            <button
+              className="btn btn-danger mt-3"
+              onClick={() => navigate("/riwayat")}
+            >
+              Lihat Riwayat
+            </button>
           </Col>
         )}
 

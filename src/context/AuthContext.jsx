@@ -192,3 +192,213 @@ export const useAuth = () => {
   }
   return context;
 };
+
+// =============================== //
+// saat menggunakan fetch //
+// import { createContext, useContext, useState, useEffect } from "react";
+// import axios from "axios";
+
+// const AuthContext = createContext();
+
+// export const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [initialized, setInitialized] = useState(false);
+
+//   // ==============================================
+//   // KONFIGURASI API (Sesuaikan dengan kebutuhan)
+//   // ==============================================
+//   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001"; // Untuk JSON Server
+//   // const API_BASE_URL = "https://api-anda.com"; // Untuk backend deployed
+
+//   // Axios instance untuk API
+//   const api = axios.create({
+//     baseURL: API_BASE_URL,
+//     timeout: 5000,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+
+//   // Interceptor untuk attach token (jika sudah login)
+//   api.interceptors.request.use((config) => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   });
+
+//   // ==============================================
+//   // INISIALISASI AWAL (Cek token saat mount)
+//   // ==============================================
+//   useEffect(() => {
+//     const initAuth = async () => {
+//       const token = localStorage.getItem("token");
+//       if (token) {
+//         try {
+//           // Untuk backend deployed:
+//           const response = await api.get("/auth/me"); // Endpoint profil user
+//           setUser(response.data.user);
+
+//           // Untuk JSON Server (mock response):
+//           // const response = await api.get(`/users?token=${token}`);
+//           // setUser(response.data[0]);
+//         } catch (err) {
+//           console.error("Auth check failed:", err);
+//           logout();
+//         }
+//       }
+//       setInitialized(true);
+//     };
+//     initAuth();
+//   }, []);
+
+//   // ==============================================
+//   // FUNGSI LOGIN (POST ke API)
+//   // ==============================================
+//   const login = async (credentials) => {
+//     setLoading(true);
+//     setError(null);
+//     try {
+//       // Untuk backend deployed:
+//       const response = await api.post("/auth/login", credentials);
+//       const { user, token } = response.data;
+
+//       // Untuk JSON Server (mock response):
+//       // const response = await api.get(`/users?username=${credentials.username}`);
+//       // const user = response.data[0];
+//       // if (!user || user.password !== credentials.password) {
+//       //   throw new Error("Invalid credentials");
+//       // }
+//       // const token = "mock-token-" + user.id;
+
+//       // Simpan token dan user
+//       localStorage.setItem("token", token);
+//       setUser(user);
+//       return user;
+//     } catch (err) {
+//       setError(err.response?.data?.message || err.message);
+//       throw err;
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ==============================================
+//   // FUNGSI REGISTER (POST ke API)
+//   // ==============================================
+//   const register = async (userData) => {
+//     setLoading(true);
+//     setError(null);
+//     try {
+//       // Validasi lokal (opsional)
+//       if (userData.password !== userData.confirmPassword) {
+//         throw new Error("Passwords don't match");
+//       }
+
+//       // Untuk backend deployed:
+//       const response = await api.post("/auth/register", userData);
+//       const { user, token } = response.data;
+
+//       // Untuk JSON Server (mock response):
+//       // const newUser = { ...userData, id: Date.now().toString() };
+//       // await api.post("/users", newUser);
+//       // const token = "mock-token-" + newUser.id;
+//       // const user = { ...newUser, password: undefined };
+
+//       // Auto-login setelah registrasi
+//       localStorage.setItem("token", token);
+//       setUser(user);
+//       return user;
+//     } catch (err) {
+//       setError(err.response?.data?.message || err.message);
+//       throw err;
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ==============================================
+//   // FUNGSI UPDATE USER (PUT ke API)
+//   // ==============================================
+//   const updateUser = async (updatedData) => {
+//     setLoading(true);
+//     setError(null);
+//     try {
+//       // Untuk backend deployed:
+//       const response = await api.put(`/users/${user.id}`, updatedData);
+//       const updatedUser = response.data;
+
+//       // Untuk JSON Server (mock response):
+//       // const response = await api.patch(`/users/${user.id}`, updatedData);
+//       // const updatedUser = response.data;
+
+//       setUser(updatedUser);
+//       return updatedUser;
+//     } catch (err) {
+//       setError(err.response?.data?.message || err.message);
+//       throw err;
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ==============================================
+//   // FUNGSI LOGOUT
+//   // ==============================================
+//   const logout = () => {
+//     // Untuk backend deployed (opsional):
+//     // api.post("/auth/logout"); // Jika backend perlu tahu
+
+//     // Hapus token dan reset state
+//     localStorage.removeItem("token");
+//     setUser(null);
+//   };
+
+//   // ==============================================
+//   // BAGIAN YANG TIDAK DIPAKAI LAGI (LocalStorage)
+//   // ==============================================
+//   /*
+//   // Kode berikut tidak dipakai lagi setelah migrasi ke API:
+//   // - Semua operasi localStorage (getItem, setItem, removeItem)
+//   // - Simulasi delay dengan setTimeout
+//   // - Pengecekan user di array localStorage
+//   // - Penyimpanan password plaintext
+//   */
+
+//   // Clear error setelah 5 detik
+//   useEffect(() => {
+//     if (error) {
+//       const timer = setTimeout(() => setError(null), 5000);
+//       return () => clearTimeout(timer);
+//     }
+//   }, [error]);
+
+//   return (
+//     <AuthContext.Provider
+//       value={{
+//         user,
+//         loading,
+//         error,
+//         initialized,
+//         isAuthenticated: !!user,
+//         login,
+//         logout,
+//         register,
+//         updateUser,
+//       }}
+//     >
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const useAuth = () => {
+//   const context = useContext(AuthContext);
+//   if (!context) {
+//     throw new Error("useAuth must be used within an AuthProvider");
+//   }
+//   return context;
+// };

@@ -24,12 +24,12 @@ const HomePage = () => {
           <Row className="header-box d-flex align-items-center pt-lg-5">
             <Col lg="6">
               <h1 className="mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                Temukan <br />
+                Scan <br />
                 <span className="text-danger fw-bold">
-                  Kualitas Daging
+                  Kesegaran Daging{" "}
                 </span>{" "}
                 <br />
-                Bersama Kami!
+                Bersama kami!
               </h1>
               <p className="mb-4 animate__animated animate__fadeInUp animate__delay-1s">
                 Meat Watch membantu Anda memastikan kesegaran daging melalui
@@ -42,8 +42,11 @@ const HomePage = () => {
               >
                 Scan disini
               </button>
-              <button className="btn btn-outline-danger btn-lg rounded-1 mb-xs-0 mb-2 animate__animated animate__fadeInUp animate__delay-1s">
-                Lihat Promo
+              <button
+                className="btn btn-outline-danger btn-lg rounded-1 mb-xs-0 mb-2 animate__animated animate__fadeInUp animate__delay-1s"
+                onClick={() => navigate("/riwayat")}
+              >
+                Lihat Riwayat
               </button>
             </Col>
             <Col lg="6" className="pt-lg-0 pt-5">
