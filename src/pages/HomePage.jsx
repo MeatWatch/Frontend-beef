@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroImage from "../assets/img/meat3.png";
 
@@ -14,11 +15,23 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper/modules";
 
+import NotificationAlert from "../components/DisclaimerAlert";
+
 const HomePage = () => {
   let navigate = useNavigate();
+  const [showNotification, setShowNotification] = useState(true);
 
   return (
     <div className="homepage">
+      {/* Notification di luar container utama agar tidak mengganggu layout */}
+      {showNotification && (
+        <div className="fixed-top mt-3" style={{ zIndex: 1000 }}>
+          <Container>
+            <NotificationAlert onClose={() => setShowNotification(false)} />
+          </Container>
+        </div>
+      )}
+
       <header className="w-100 min-vh-100 d-flex align-item-center overflow-hidden">
         <Container>
           <Row className="header-box d-flex align-items-center pt-lg-5">

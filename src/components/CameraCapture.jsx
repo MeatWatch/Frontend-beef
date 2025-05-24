@@ -486,11 +486,26 @@ const CameraCapture = () => {
                 </div>
               )}
             </div>
+            <div className="pt-5">
+              "Disclaimer: Hasil deteksi dapat bervariasi tergantung pada
+              kualitas gambar, pencahayaan, sudut pengambilan foto, serta faktor
+              lingkungan lainnya. Oleh karena itu, hasil klasifikasi mungkin
+              tidak selalu akurat. Gunakan hasil deteksi ini sebagai referensi
+              awal dan tetap periksa kondisi daging secara langsung sebelum
+              digunakan."
+            </div>
             <button
               className="btn btn-danger mt-3"
               onClick={() => navigate("/riwayat")}
+              style={{ marginRight: "10px" }}
             >
               Lihat Riwayat
+            </button>
+            <button
+              className="btn btn-danger mt-3"
+              onClick={() => navigate("/testimonial")}
+            >
+              Pelajari Lebih Lanjut
             </button>
           </Col>
         )}
