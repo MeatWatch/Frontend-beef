@@ -1,101 +1,119 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Tambahkan ini
-// import axios from "axios";  // <-- Uncomment when using real server
+import { useNavigate } from "react-router-dom";
 import { Spinner, Modal, Button } from "react-bootstrap";
 import RiwayatCard from "../components/RiwayatCard";
-
 import { mockApi } from "../api/mockApi";
 
 const RiwayatPage = () => {
-  const [riwayat, setRiwayat] = useState([]);
+  const [classifications, setClassifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedClassification, setSelectedClassification] = useState(null);
 
-  const navigate = useNavigate(); // <-- Inisialisasi navigate
+  const navigate = useNavigate();
+
+  // Helper function to safely parse dates
+  const parseDate = (dateString) => {
+    try {
+      const date = new Date(dateString);
+      return isNaN(date.getTime()) ? new Date() : date; // Return current date if invalid
+    } catch {
+      return new Date(); // Return current date if parsing fails
+    }
+  };
 
   useEffect(() => {
-    const fetchRiwayat = async () => {
+    const fetchClassifications = async () => {
       try {
         setIsLoading(true);
-
-        // ==============================================
-        // LOCAL MODE - Using mock data
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user?.user_id || 1;
-        const data = await mockApi.getClassificationHistory(userId);
-        setRiwayat(data);
-        // ==============================================
 
-        // ==============================================
-        // SERVER MODE - Uncomment when using real server
+        // LOCAL MODE
+        let data = await mockApi.getUserClassifications(userId);
+
+        // Ensure dates are valid
+        data = data.map((item) => ({
+          ...item,
+          created_at: parseDate(
+            item.created_at || item.analyzed_at || new Date()
+          ),
+        }));
+
+        setClassifications(data);
+
+        // SERVER MODE - Uncomment when ready
         /*
-        const response = await axios.get("http://localhost:3001/api/history", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        const response = await axios.get("http://localhost:3001/api/classifications", {
+          params: { user_id: userId },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         });
-        setRiwayat(response.data);
+        const validData = response.data.map(item => ({
+          ...item,
+          created_at: parseDate(item.created_at)
+        }));
+        setClassifications(validData);
         */
-        // ==============================================
       } catch (err) {
-        console.error("Failed to load history:", err);
+        console.error("Failed to load classifications:", err);
         setError(
           err.response?.data?.message ||
-            "Failed to load history data. Please try again."
+            "Failed to load data. Please try again."
         );
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchRiwayat();
+    fetchClassifications();
   }, []);
 
-  const handleViewDetails = (item) => {
-    setSelectedItem(item);
-    console.log("Viewing details for:", item);
-    // Here you can implement a modal or navigation to detail page
+  const handleViewDetails = (classification) => {
+    setSelectedClassification(classification);
   };
 
   const handleDelete = async (id) => {
     try {
-      // ==============================================
-      // LOCAL MODE - Just remove from state
-      setRiwayat(riwayat.filter((item) => item.id !== id));
-      // ==============================================
+      // LOCAL MODE
+      setClassifications(classifications.filter((item) => item.id !== id));
 
-      // ==============================================
-      // SERVER MODE - Uncomment when using real server
+      // SERVER MODE
       /*
-      await axios.delete(`http://localhost:3001/api/history/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+      await axios.delete(`http://localhost:3001/api/classifications/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
-      setRiwayat(riwayat.filter((item) => item.id !== id));
+      setClassifications(classifications.filter(item => item.id !== id));
       */
-      // ==============================================
     } catch (err) {
-      console.error("Failed to delete history:", err);
+      console.error("Delete failed:", err);
       alert(
-        err.response?.data?.message ||
-          "Failed to delete history. Please try again."
+        err.response?.data?.message || "Failed to delete. Please try again."
       );
     }
   };
 
+  // Format date for display
+  const formatDate = (date) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    return date.toLocaleDateString("id-ID", options);
+  };
+
   return (
-    <div className="min-h-screen py-4 pt-5 bg-light animate__animated animate__fadeInUp animate__delay-0.5s">
-      {" "}
-      {/* Added pt-20 for navbar spacing */}
+    <div className="min-h-screen py-4 pt-5 bg-light">
       <div className="pt-5">
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 animate__animated animate__fadeInUp animate__delay-1s">
-            Scan History
+          <h1 className="text-3xl font-bold text-gray-900">
+            Classification History
           </h1>
-          <p className="mt-2 text-lg text-gray-600 animate__animated animate__fadeInUp animate__delay-1s">
-            List of meat freshness inspection results
+          <p className="mt-2 text-lg text-gray-600">
+            List of meat classification results
           </p>
         </div>
 
@@ -111,16 +129,17 @@ const RiwayatPage = () => {
               {error}
             </div>
           </div>
-        ) : riwayat.length > 0 ? (
-          <div className="p-4 space-y-6 ">
-            {" "}
-            {/* Changed container to space-y-6 for better spacing */}
-            {riwayat
-              .sort((a, b) => new Date(b.analyzed_at) - new Date(a.analyzed_at))
-              .map((item) => (
+        ) : classifications.length > 0 ? (
+          <div className="p-4 space-y-6">
+            {classifications
+              .sort((a, b) => b.created_at - a.created_at)
+              .map((classification) => (
                 <RiwayatCard
-                  key={item.id}
-                  item={item}
+                  key={classification.id}
+                  item={{
+                    ...classification,
+                    analyzed_at: formatDate(classification.created_at),
+                  }}
                   onViewDetails={handleViewDetails}
                   onDelete={handleDelete}
                 />
@@ -129,65 +148,76 @@ const RiwayatPage = () => {
         ) : (
           <div className="text-center py-16">
             <div className="bg-blue-50 text-blue-700 p-6 rounded-xl inline-block">
-              <p className="text-lg">No scan history yet.</p>
+              <p className="text-lg">No classification results yet.</p>
               <p className="mt-2 text-sm">
-                Start scanning your meat to see history here.
+                Start scanning your meat to see results here.
               </p>
             </div>
           </div>
         )}
       </div>
-      <div className="flex justify-center mt-10 ">
+
+      <div className="flex justify-center mt-10">
         <button onClick={() => navigate("/scan")} className="btn btn-danger">
           ← Back to Scan
         </button>
       </div>
-      {/* detail */}
+
+      {/* Classification Detail Modal */}
       <Modal
-        show={!!selectedItem}
-        onHide={() => setSelectedItem(null)}
+        show={!!selectedClassification}
+        onHide={() => setSelectedClassification(null)}
         centered
+        size="lg"
+        dialogClassName="modal-dialog-scrollable custom-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Detail Pemeriksaan</Modal.Title>
+          <Modal.Title>Classification Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedItem && (
+          {selectedClassification && (
             <>
               <p>
-                <strong>Jenis Daging:</strong> {selectedItem.meat_type}
+                <strong>Meat Type:</strong> {selectedClassification.meat_type}
               </p>
               <p>
-                <strong>Hasil:</strong> {selectedItem.result}
+                <strong>Result:</strong> {selectedClassification.result}
               </p>
               <p>
-                <strong>Tingkat Keyakinan:</strong>{" "}
-                {(selectedItem.confidence * 100).toFixed(2)}%
+                <strong>Confidence Level:</strong>{" "}
+                {(selectedClassification.confidence * 100).toFixed(2)}%
               </p>
               <p>
-                <strong>Tanggal Analisis:</strong>{" "}
-                {new Date(selectedItem.analyzed_at).toLocaleString("id-ID")}
+                <strong>Created At:</strong>{" "}
+                {formatDate(selectedClassification.created_at)}
               </p>
               <hr />
-              <p>
-                <strong>Warna:</strong> {selectedItem.details?.color || "-"}
-              </p>
-              <p>
-                <strong>Tekstur:</strong> {selectedItem.details?.texture || "-"}
-              </p>
-              <p>
-                <strong>Bau:</strong> {selectedItem.details?.smell || "-"}
-              </p>
-              <p>
-                <strong>pH Level:</strong>{" "}
-                {selectedItem.details?.ph_level || "-"}
-              </p>
+              {selectedClassification.image_url && (
+                <div className="mt-3">
+                  <p>
+                    <strong>Image:</strong>
+                  </p>
+                  <img
+                    src={selectedClassification.image_url}
+                    alt="Classification"
+                    style={{
+                      maxWidth: "300px",
+                      width: "100%",
+                      borderRadius: "8px",
+                      display: "inline-block",
+                    }}
+                  />
+                </div>
+              )}
             </>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setSelectedItem(null)}>
-            Tutup
+          <Button
+            variant="secondary"
+            onClick={() => setSelectedClassification(null)}
+          >
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

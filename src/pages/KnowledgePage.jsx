@@ -1,6 +1,11 @@
 // pages/KnowledgePage.jsx
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { qualityIndicators, storageGuidelines } from "../data/index";
+import {
+  qualityIndicators,
+  storageGuidelines,
+  scanGuide,
+  scanDisclaimer,
+} from "../data/index";
 import FaqComponent from "../components/FaqComponent";
 import "animate.css";
 
@@ -73,6 +78,37 @@ const KnowledgePage = () => {
                   </Col>
                 ))}
               </Row>
+            </Col>
+          </Row>
+
+          {/* Panduan Menggunakan Fitur Scan */}
+          <Row className="mt-5">
+            <Col>
+              <h2 className="text-center fw-bold mb-4 text-danger">
+                Cara Menggunakan Fitur Scan
+              </h2>
+              <Row className="g-4">
+                {scanGuide.map((step, index) => (
+                  <Col key={index} md={4}>
+                    <Card className="h-100 shadow-sm border-0">
+                      <Card.Body>
+                        <h5 className="fw-bold">{step.step}</h5>
+                        <p>{step.description}</p>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Col>
+          </Row>
+
+          {/* Disclaimer */}
+          <Row className="mt-4">
+            <Col>
+              <div className="p-4 bg-warning-subtle border-start border-5 border-warning rounded shadow-sm">
+                <h5 className="fw-bold text-warning">⚠️ Disclaimer:</h5>
+                <p className="mb-0">{scanDisclaimer}</p>
+              </div>
             </Col>
           </Row>
         </Container>

@@ -316,9 +316,12 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
-      { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/elvino-junior-ba94b8214/",
+      },
+      { platform: "instagram", url: "https://www.instagram.com/elv.jnr/" },
+      { platform: "github", url: "https://github.com/elvinojunior" },
     ],
   },
   {
@@ -328,9 +331,15 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
-      { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/robysaidiprasetyo/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      },
+      {
+        platform: "instagram",
+        url: "https://www.instagram.com/robysaidiiiii?igsh=MXFhZWJzNjJpcm5waw==",
+      },
+      { platform: "github", url: "https://github.com/Robbysaidiii" },
     ],
   },
   {
@@ -340,9 +349,12 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
-      { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/muhamad-firdaus-b25801190/",
+      },
+      { platform: "instagram", url: "https://www.instagram.com/frdaussss20/" },
+      { platform: "github", url: "https://github.com/TheDuke03" },
     ],
   },
   {
@@ -352,9 +364,12 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
-      { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/syuhada-aqlul-hafiz-28b8aa351/",
+      },
+      { platform: "instagram", url: "https://www.instagram.com/syuhadaa.hfz/" },
+      { platform: "github", url: "https://github.com/SyuhadaAqlulHafiz" },
     ],
   },
   {
@@ -364,9 +379,12 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/fahrul-alamsyah-5a3916351",
+      },
       { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      { platform: "github", url: "https://github.com/K0ZUK1" },
     ],
   },
   {
@@ -376,9 +394,12 @@ export const teamMembers = [
     bio: "Universitas Indraprasta PGRI",
     image: People3,
     socialMedia: [
-      { platform: "linkedin", url: "#" },
-      { platform: "instagram", url: "#" },
-      { platform: "github", url: "#" },
+      {
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/agung-purnomo-234238272/",
+      },
+      { platform: "instagram", url: "https://www.instagram.com/agungpur00/" },
+      { platform: "github", url: "https://github.com/Agungpurr" },
     ],
   },
   // ... (add 5 more team members)
@@ -479,3 +500,27 @@ export const storageGuidelines = [
     tips: "Jangan buka kemasan sebelum digunakan, simpan dalam kemasan aslinya atau vakum",
   },
 ];
+
+export const scanGuide = [
+  {
+    step: "1. Siapkan Daging",
+    description:
+      "Pastikan daging yang akan dipindai diletakkan di permukaan datar dengan pencahayaan yang cukup. Hindari bayangan atau cahaya yang terlalu terang.",
+  },
+  {
+    step: "2. Gunakan Kamera",
+    description:
+      "Arahkan kamera ke daging dengan jelas. Pastikan keseluruhan bagian daging terlihat dalam frame. Hindari gambar blur.",
+  },
+  {
+    step: "3. Tunggu Hasil",
+    description:
+      "Setelah gambar diambil, sistem akan menganalisis tingkat kesegaran daging dan memberikan saran penyimpanan.",
+  },
+];
+
+export const scanDisclaimer = `
+Hasil klasifikasi daging mungkin tidak selalu 100% akurat karena dipengaruhi oleh kualitas gambar, pencahayaan, dan kondisi lingkungan saat pemindaian. 
+Gunakan hasil sebagai referensi awal, dan tetap perhatikan kondisi fisik dan aroma daging secara langsung. 
+Kami tidak bertanggung jawab atas keputusan konsumsi yang diambil sepenuhnya berdasarkan hasil scan.
+`;

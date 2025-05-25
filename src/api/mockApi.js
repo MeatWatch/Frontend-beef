@@ -127,14 +127,14 @@ export const mockApi = {
     };
   },
 
-  getClassificationHistory: async (userId) => {
+  getUserClassifications: async (userId) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Generate history with mixed results
     return [
       createHistoryItem(1, "beef", "Fresh", 0.95),
       createHistoryItem(2, "chicken", "Not Fresh", 0.65),
-      createHistoryItem(3, "fish", "Spoiled", 0.92),
+      createHistoryItem(3, "fish", "fresh", 0.92),
     ];
   },
 };
@@ -184,7 +184,6 @@ function generateDetails(meatType, result) {
     beef: { color: "Merah", texture: "Padat", smell: "Netral" },
     chicken: { color: "Pink", texture: "Kenyal", smell: "Ringan" },
     fish: { color: "Cerah", texture: "Elastis", smell: "Amis segar" },
-    lamb: { color: "Merah tua", texture: "Padat", smell: "Khas" },
   };
 
   if (result === "Fresh") {
