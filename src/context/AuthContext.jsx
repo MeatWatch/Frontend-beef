@@ -208,15 +208,25 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const initializeAuth = async () => {
       const token = localStorage.getItem("token");
+      const savedUser = localStorage.getItem("user");
+
       if (token) {
+        // Ambil user dari localStorage lebih dulu untuk pengalaman cepat
+        if (savedUser) {
+          setUser(JSON.parse(savedUser));
+        }
+
         try {
           setLoading(true);
-          // Verify token and get user data
+          // Cek ulang ke backend untuk validasi token & update user
           const response = await api.get("/auth/me");
           setUser(response.data.user);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
         } catch (err) {
           console.error("Failed to verify token", err);
           localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          setUser(null);
         } finally {
           setLoading(false);
           setInitialized(true);
@@ -233,11 +243,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.put("/users/me", updatedData);
-
-      // Update user in state
+      const response = await api.patch(`/users/${user._id}`, updatedData); // ✅
       setUser(response.data.user);
-
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       return { success: true, user: response.data.user };
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -251,15 +259,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (credentials) => {
+    console.log("🔍 Credentials before sending:", credentials);
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post("/auth/login", credentials);
+      const { identifier, password } = credentials;
+      const response = await api.post("/users/login", {
+        identifier,
+        password,
+      });
 
-      // Store token and user data
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // ✅ Simpan user
       setUser(response.data.user);
-
       return response.data.user;
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -273,15 +285,12 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      // Remove confirmPassword if exists before sending to backend
       const { confirmPassword, ...registrationData } = userData;
-
       const response = await api.post("/users/register", registrationData);
 
-      // Auto-login after registration
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // ✅ Simpan user
       setUser(response.data.user);
-
       return response.data.user;
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -294,8 +303,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
-    // Optional: Call backend logout endpoint if you have one
-    // await api.post("/auth/logout");
+    localStorage.removeItem("user"); // ✅ Hapus user juga
   };
 
   // Clear error after some time

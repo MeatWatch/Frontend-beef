@@ -82,8 +82,13 @@ const LoginForm = ({ onSubmit, loading, error }) => {
     const isUsernameValid = validateField("username", credentials.username);
     const isPasswordValid = validateField("password", credentials.password);
 
+    // login form berhasil dengan mengubah username menjadi identifier
     if (isUsernameValid && isPasswordValid) {
-      onSubmit(credentials);
+      onSubmit({
+        identifier: credentials.username, // ← ini perubahan penting
+        password: credentials.password,
+        rememberMe: credentials.rememberMe,
+      });
       clearFormData();
     }
   };

@@ -8,7 +8,7 @@ const api = axios.create({
   },
 });
 
-// Jika kamu nanti butuh token, aktifkan interceptor ini:
+// Interceptor untuk menyisipkan token di header Authorization
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
