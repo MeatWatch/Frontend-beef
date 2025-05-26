@@ -276,7 +276,7 @@ export const AuthProvider = ({ children }) => {
       // Remove confirmPassword if exists before sending to backend
       const { confirmPassword, ...registrationData } = userData;
 
-      const response = await api.post("/users/", registrationData);
+      const response = await api.post("/users/register", registrationData);
 
       // Auto-login after registration
       localStorage.setItem("token", response.data.token);
