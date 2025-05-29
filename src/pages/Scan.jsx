@@ -1,6 +1,6 @@
 // import { Container, Row, Col } from "react-bootstrap";
 
-import CameraCapture from "../components/CameraCapture";
+import CameraCapture from "../components/CameraCapture.jsx";
 
 const Scan = () => {
   return (

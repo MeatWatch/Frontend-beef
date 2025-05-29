@@ -194,7 +194,8 @@
 // };
 
 import { createContext, useContext, useState, useEffect } from "react";
-import api from "../api/axios"; // Adjust the import path
+import api from "../api/axios";
+import { jwtDecode } from "jwt-decode"; // ✅ ini benar
 
 const AuthContext = createContext();
 
@@ -204,36 +205,36 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [initialized, setInitialized] = useState(false);
 
-  // Initialize auth state from token and user data
   useEffect(() => {
-    const initializeAuth = async () => {
+    const initializeAuth = () => {
       const token = localStorage.getItem("token");
       const savedUser = localStorage.getItem("user");
 
       if (token) {
-        // Ambil user dari localStorage lebih dulu untuk pengalaman cepat
+        // Kalau user sudah ada, pakai langsung
         if (savedUser) {
           setUser(JSON.parse(savedUser));
-        }
+        } else {
+          try {
+            // ✅ Decode token dan ambil data user
+            const decoded = jwt_decode(token);
+            const userFromToken = {
+              _id: decoded.id, // pastikan backend encode "id" di token
+              name: decoded.name, // tambahkan jika perlu
+              email: decoded.email, // opsional
+            };
 
-        try {
-          setLoading(true);
-          // Cek ulang ke backend untuk validasi token & update user
-          const response = await api.get("/auth/me");
-          setUser(response.data.user);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-        } catch (err) {
-          console.error("Failed to verify token", err);
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          setUser(null);
-        } finally {
-          setLoading(false);
-          setInitialized(true);
+            setUser(userFromToken);
+            localStorage.setItem("user", JSON.stringify(userFromToken));
+          } catch (err) {
+            console.error("❌ Invalid token", err);
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setUser(null);
+          }
         }
-      } else {
-        setInitialized(true);
       }
+      setInitialized(true);
     };
 
     initializeAuth();
@@ -242,37 +243,54 @@ export const AuthProvider = ({ children }) => {
   const updateUser = async (updatedData) => {
     setLoading(true);
     setError(null);
+
     try {
-      const response = await api.patch(`/users/${user._id}`, updatedData); // ✅
-      setUser(response.data.user);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      return { success: true, user: response.data.user };
+      const formData = new FormData();
+      formData.append("username", updatedData.username);
+      formData.append("email", updatedData.email);
+      formData.append("phone", updatedData.phone || "");
+      formData.append("address", updatedData.address || "");
+      formData.append("full_name", updatedData.username); // Sesuaikan dengan kebutuhan
+
+      // Jika avatar adalah data URL, konversi ke blob
+      if (updatedData.avatar && updatedData.avatar.startsWith("data:image")) {
+        const blob = await fetch(updatedData.avatar).then((r) => r.blob());
+        formData.append("profile_picture", blob, "avatar.jpg");
+      }
+
+      const response = await api.patch(`/users/profile`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const updatedUser = { ...user, ...response.data.user };
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return { success: true, user: updatedUser };
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
-      return {
-        success: false,
-        error: err.response?.data?.message || err.message,
-      };
+      const errorMsg = err.response?.data?.message || err.message;
+      setError(errorMsg);
+      return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
     }
   };
 
   const login = async (credentials) => {
-    console.log("🔍 Credentials before sending:", credentials);
     setLoading(true);
     setError(null);
     try {
       const { identifier, password } = credentials;
-      const response = await api.post("/users/login", {
-        identifier,
-        password,
-      });
+      const response = await api.post("/users/login", { identifier, password });
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // ✅ Simpan user
-      setUser(response.data.user);
-      return response.data.user;
+      const { token, user } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user)); // Simpan full user
+      setUser(user);
+      return user;
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       throw err;
@@ -288,10 +306,12 @@ export const AuthProvider = ({ children }) => {
       const { confirmPassword, ...registrationData } = userData;
       const response = await api.post("/users/register", registrationData);
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // ✅ Simpan user
-      setUser(response.data.user);
-      return response.data.user;
+      const { token, user } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
+      return user;
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       throw err;
@@ -303,10 +323,10 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
-    localStorage.removeItem("user"); // ✅ Hapus user juga
+    localStorage.removeItem("user");
   };
 
-  // Clear error after some time
+  // Auto clear error after 5s
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(null), 5000);
