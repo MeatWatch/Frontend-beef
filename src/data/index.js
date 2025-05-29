@@ -11,6 +11,7 @@ import KelasImage9 from "../assets/img/kelas/beef-9.jpg";
 import People1 from "../assets/img/testimonial/people-1.jpg";
 import People2 from "../assets/img/testimonial/people-2.jpg";
 import People3 from "../assets/img/testimonial/people-3.jpg";
+import People4 from "../assets/img/testimonial/people-4.jpg";
 
 export const navLinks = [
   {
@@ -214,45 +215,45 @@ export const kelasTerbaru = [
 export const dataSwiper = [
   {
     id: 1,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya memastikan kualitas daging sebelum digunakan. Fitur deteksinya cepat dan akurat!",
     image: People1,
-    name: "People 1",
-    skill: "UI UX Designer",
+    name: "Chef Amanda",
+    skill: "Chef Profesional",
   },
   {
     id: 2,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc :"Sebelumnya saya harus cek manual satu per satu, sekarang cukup pakai aplikasi ini, Hemat waktu",
     image: People2,
-    name: "People 2",
-    skill: "Flutter Developer",
+    name: "Pak Budi ",
+    skill: "Penjual Daging",
   },
   {
     id: 3,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
-    name: "People 3",
-    skill: "Web Developer",
+    desc :"Saya nggak perlu ragu lagi saat beli daging di pasar. Tinggal foto dan aplikasi langsung kasih tahu segar atau tidak.",
+    image: People1,
+    name: "Ibu Rina 3",
+    skill: "Ibu Rumah Tangga",
   },
   {
     id: 4,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
-    name: "People 4",
-    skill: "UI UX Designer",
+    desc :"Sebuah inovasi yang luar biasa untuk mendukung keamanan pangan. Bisa jadi tools penting untuk edukasi masyarakat.",
+    image: People2,
+    name: "Dr. Dimas",
+    skill: "Peneliti Pangan",
   },
   {
     id: 5,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People2,
-    name: "People 5",
-    skill: "Flutter Developer",
+    desc : "Sangat membantu untuk tugas kampus saya tentang analisis kualitas pangan. Praktis dan mudah dipahami",
+    image: People1,
+    name: "Nina",
+    skill: "Mahasiswa Gizi",
   },
   {
     id: 6,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc : "Dengan aplikasi ini, stok daging di restoran saya selalu terkontrol kualitasnya, meminimalkan risiko komplain dari pelanggan  ",
     image: People3,
-    name: "People 6",
-    skill: "Web Developer",
+    name: "Pak Arif",
+    skill: "Pemilik Restoran",
   },
 ];
 
@@ -261,49 +262,49 @@ export const faq = [
     id: 1,
     eventKey: 0,
     title: "Apakah Aplikasi Ini Berbayar atau Gratis?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Aplikasi Meat Watch sepenuhnya gratis untuk digunakan oleh semua pengguna. Kami percaya bahwa informasi tentang kesegaran daging harus dapat diakses dengan mudah dan tanpa biaya. Tidak ada biaya tersembunyi, langganan bulanan, ataupun pembelian dalam aplikasi. Cukup unduh dan gunakan aplikasinya untuk memastikan kualitas daging Anda setiap saat!",
   },
   {
     id: 2,
     eventKey: 1,
     title: "Bagaimana Cara Mengecek Kualitas Daging?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Cukup buka aplikasi Meat Watch, lalu arahkan kamera ke potongan daging yang ingin Anda periksa. Aplikasi akan secara otomatis menganalisis warna, tekstur, dan pola visual daging menggunakan teknologi AI. Dalam hitungan detik, Anda akan mendapatkan informasi apakah daging tersebut segar, kurang segar, atau sudah tidak layak konsumsi, lengkap dengan saran penanganan atau penyimpanan.",
   },
   {
     id: 3,
     eventKey: 2,
     title: "Apakah Bisa Digunakan untuk Semua Jenis Daging?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Saat ini, aplikasi Meat Watch difokuskan untuk mendeteksi kualitas daging sapi dan ayam. Namun, kami terus mengembangkan teknologi agar dapat mendukung jenis daging lain seperti kambing, bebek, dan ikan di versi mendatang. Pastikan Anda selalu memperbarui aplikasi untuk mendapatkan fitur terbaru dan akurasi yang lebih luas.",
   },
   {
     id: 4,
     eventKey: 3,
     title: "Apakah Ada Fitur Konsultasi atau Diskusi dengan Ahli Gizi?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Saat ini, fitur konsultasi langsung dengan ahli gizi belum tersedia di aplikasi Meat Watch. Namun, kami memahami pentingnya edukasi gizi bagi pengguna, sehingga fitur ini sedang dalam tahap pengembangan. Ke depannya, kami berencana menghadirkan layanan konsultasi interaktif agar Anda bisa mendapatkan saran profesional seputar konsumsi daging yang sehat dan bergizi.",
   },
   {
     id: 5,
     eventKey: 4,
     title: "Apakah Hasil Pemeriksaan Bisa Disimpan atau Diakses Kembali?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Ya, setiap hasil pemeriksaan daging yang Anda lakukan akan tersimpan secara otomatis di menu Riwayat. Anda dapat mengakses kembali informasi tersebut kapan saja, lengkap dengan tanggal, waktu, dan status kesegaran daging. Fitur ini memudahkan Anda untuk melakukan pencatatan atau pengecekan ulang jika diperlukan.",
   },
   {
     id: 6,
     eventKey: 5,
     title: "Apakah Ada Panduan atau Tips Menyimpan Daging yang Sehat?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Tentu! Aplikasi Meat Watch menyediakan panduan penyimpanan daging yang sehat dan higienis setelah Anda melakukan pemeriksaan. Tips ini mencakup cara menyimpan di suhu yang tepat, durasi penyimpanan ideal, serta saran penggunaan freezer atau chiller. Tujuannya adalah agar kualitas dan kesegaran daging tetap terjaga hingga waktu konsumsi.",
   },
   {
     id: 7,
     eventKey: 6,
     title: "Apakah Saya Bisa Mengunggah Foto Daging untuk Analisis?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Ya, Anda bisa mengunggah foto daging langsung dari galeri atau mengambil gambar baru melalui kamera di aplikasi Meat Watch. Sistem kami akan menganalisis foto tersebut menggunakan teknologi AI untuk menentukan tingkat kesegaran daging secara instan. Pastikan pencahayaan cukup dan gambar jelas agar hasil analisis lebih akurat.",
   },
   {
     id: 8,
     eventKey: 7,
     title: "Apakah Bisa Ganti Jenis Pemeriksaan Setelah Memilih?",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.",
+    desc: "Ya, Anda bisa mengganti jenis pemeriksaan kapan saja sebelum proses analisis dimulai. Jika Anda sudah memilih jenis daging namun ingin mengubahnya, cukup kembali ke halaman sebelumnya atau gunakan opsi “Ubah Jenis Daging” di layar pemindaian. Fleksibilitas ini memudahkan Anda untuk mendapatkan hasil yang sesuai dengan jenis daging yang dianalisis.",
   },
 ];
 
@@ -314,7 +315,7 @@ export const teamMembers = [
     name: "Elvino Junior",
     role: "Founder & CEO",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
@@ -329,7 +330,7 @@ export const teamMembers = [
     name: "Robby Saidi",
     role: "Machine Learning",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
@@ -347,7 +348,7 @@ export const teamMembers = [
     name: "Muhammad Firdaus",
     role: "Machine Learning",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
@@ -362,7 +363,7 @@ export const teamMembers = [
     name: "Syuhada Aqlul Hafiz",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
@@ -377,13 +378,13 @@ export const teamMembers = [
     name: "Fahrul Alamsyah ",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
         url: "https://www.linkedin.com/in/fahrul-alamsyah-5a3916351",
       },
-      { platform: "instagram", url: "#" },
+      { platform: "instagram", url: "https://www.instagram.com/fahrul.css/" },
       { platform: "github", url: "https://github.com/K0ZUK1" },
     ],
   },
@@ -392,7 +393,7 @@ export const teamMembers = [
     name: "Agung Purnomo",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People3,
+    image: People4,
     socialMedia: [
       {
         platform: "linkedin",
