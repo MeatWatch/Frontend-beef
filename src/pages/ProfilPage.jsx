@@ -8,9 +8,9 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({
     username: user?.username || "",
     email: user?.email || "",
-    phone: user?.phone || "",
+    no_telp: user?.no_telp || "",
     address: user?.address || "",
-    avatar: user?.avatar || "",
+    avatar: user?.profile_picture || "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -26,34 +26,31 @@ const ProfilePage = () => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Basic validation
-    if (!file.type.match("image.*")) {
-      setError("Please select an image file");
-      setTimeout(() => setError(""), 3000);
+    // Validasi lebih ketat
+    if (!file.type.startsWith("image/")) {
+      setError("Hanya file gambar yang diperbolehkan");
       return;
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      setError("Image size should be less than 2MB");
-      setTimeout(() => setError(""), 3000);
+      setError("Ukuran gambar maksimal 2MB");
       return;
     }
 
     setIsUploading(true);
 
     try {
-      // In a real app, you would upload the image to your server here
-      // For demonstration, we'll use a mock upload that returns a data URL
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({ ...prev, avatar: reader.result }));
-        setIsUploading(false);
-      };
-      reader.readAsDataURL(file);
+      // Gunakan File object langsung tanpa konversi ke data URL
+      setFormData((prev) => ({
+        ...prev,
+        avatar: file,
+        avatarPreview: URL.createObjectURL(file),
+      }));
     } catch (err) {
-      setError("Failed to upload image");
+      setError("Gagal memproses gambar");
+      console.error("Error processing image:", err);
+    } finally {
       setIsUploading(false);
-      setTimeout(() => setError(""), 3000);
     }
   };
 
@@ -67,14 +64,14 @@ const ProfilePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateUser(formData);
-      setSuccess("Profile updated successfully!");
-      setError("");
-      setIsEditing(false);
-      setTimeout(() => setSuccess(""), 3000);
+      const result = await updateUser(formData);
+      if (result.success) {
+        setSuccess("Profil berhasil diperbarui!");
+        setIsEditing(false);
+      }
     } catch (err) {
-      setError(err.message);
-      setTimeout(() => setError(""), 3000);
+      console.error("Update error details:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "Gagal memperbarui profil");
     }
   };
 
@@ -91,10 +88,17 @@ const ProfilePage = () => {
                 <div className="position-relative d-inline-block">
                   <img
                     src={
-                      formData.avatar ||
-                      "https://ui-avatars.com/api/?name=" +
-                        encodeURIComponent(user?.username || "") +
-                        "&background=dc3545&color=fff&size=120"
+                      isEditing
+                        ? formData.avatarPreview ||
+                          (formData.avatar?.startsWith?.("data:image")
+                            ? formData.avatar
+                            : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                user?.username || ""
+                              )}&background=dc3545&color=fff&size=120`)
+                        : user?.profile_picture ||
+                          `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                            user?.username || ""
+                          )}&background=dc3545&color=fff&size=120`
                     }
                     alt="Profile"
                     className="rounded-circle mb-3"
@@ -172,8 +176,8 @@ const ProfilePage = () => {
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  name="no_telp"
+                  value={formData.no_telp}
                   onChange={handleChange}
                   autoComplete="tel"
                 />
@@ -233,7 +237,7 @@ const ProfilePage = () => {
                 </h5>
                 <div className="text-center ps-3">
                   <p className="mb-2">
-                    <strong>Phone:</strong> {user?.phone || "-"}
+                    <strong>Phone:</strong> {user?.no_telp || "-"}
                   </p>
                   <p className="mb-0">
                     <strong>Address:</strong> {user?.address || "-"}
@@ -246,11 +250,11 @@ const ProfilePage = () => {
                 <div className="text-center ps-3">
                   <p className="mb-2">
                     <strong>Member since:</strong>{" "}
-                    {new Date(user?.createdAt).toLocaleDateString()}
+                    {new Date(user?.created_at).toLocaleDateString()}
                   </p>
                   <p className="mb-0">
                     <strong>Last updated:</strong>{" "}
-                    {new Date(user?.updatedAt).toLocaleDateString()}
+                    {new Date(user?.updated_at).toLocaleDateString()}
                   </p>
                 </div>
               </div>
