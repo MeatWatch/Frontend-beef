@@ -95,8 +95,9 @@ const ProfilePage = () => {
                             : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                                 user?.username || ""
                               )}&background=dc3545&color=fff&size=120`)
-                        : user?.profile_picture ||
-                          `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        : user?.profile_picture
+                        ? `http://localhost:3000/images/users/${user.profile_picture}`
+                        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                             user?.username || ""
                           )}&background=dc3545&color=fff&size=120`
                     }
@@ -212,10 +213,11 @@ const ProfilePage = () => {
               <div className="position-relative d-inline-block">
                 <img
                   src={
-                    user?.avatar ||
-                    "https://ui-avatars.com/api/?name=" +
-                      encodeURIComponent(user?.username || "") +
-                      "&background=dc3545&color=fff&size=120"
+                    user?.avatar || user?.profile_picture
+                      ? `http://localhost:3000/images/users/${user.profile_picture}`
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          user?.username || ""
+                        )}&background=dc3545&color=fff&size=120`
                   }
                   alt="Profile"
                   className="rounded-circle mb-3"

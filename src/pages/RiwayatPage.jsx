@@ -192,23 +192,23 @@ const RiwayatPage = () => {
                 {formatDate(selectedClassification.created_at)}
               </p>
               <hr />
-              {selectedClassification.image_url && (
-                <div className="mt-3">
-                  <p>
-                    <strong>Image:</strong>
-                  </p>
-                  <img
-                    src={selectedClassification.image_url}
-                    alt="Classification"
-                    style={{
-                      maxWidth: "300px",
-                      width: "100%",
-                      borderRadius: "8px",
-                      display: "inline-block",
-                    }}
-                  />
-                </div>
-              )}
+              {/* {selectedClassification.image_url && (
+                // <div className="mt-3">
+                //   <p>
+                //     <strong>Image:</strong>
+                //   </p>
+                //   <img
+                //     src={selectedClassification.image_url}
+                //     alt="Classification"
+                //     style={{
+                //       maxWidth: "300px",
+                //       width: "100%",
+                //       borderRadius: "8px",
+                //       display: "inline-block",
+                //     }}
+                //   />
+                // </div>
+              )} */}
             </>
           )}
         </Modal.Body>

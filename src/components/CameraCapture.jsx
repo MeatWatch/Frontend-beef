@@ -385,7 +385,7 @@ const CameraCapture = () => {
           </Col>
         )}
 
-        <Col md={12} className="mb-3">
+        {/* <Col md={12} className="mb-3">
           <Form.Group controlId="meatTypeSelect">
             <Form.Label>Pilih Jenis Daging:</Form.Label>
             <Form.Select
@@ -398,7 +398,7 @@ const CameraCapture = () => {
               <option value="fish">Daging Ikan</option>
             </Form.Select>
           </Form.Group>
-        </Col>
+        </Col> */}
 
         <Col className="text-center mb-4 animate__animated animate__fadeInUp animate__delay-1s">
           <Row className="gx-3 gy-2 justify-content-center">

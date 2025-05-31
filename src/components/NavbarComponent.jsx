@@ -71,13 +71,20 @@ const NavbarComponent = () => {
                 title={
                   <span className="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-1">
                     <Image
-                      src={user.avatar || "/default-avatar.png"}
+                      src={
+                        user?.profile_picture
+                          ? `http://localhost:3000/images/users/${user.profile_picture}`
+                          : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                              user.username
+                            )}&background=dc3545&color=fff&size=120`
+                      }
                       roundedCircle
                       width="30"
                       height="30"
                       alt="User Avatar"
                       style={{ objectFit: "cover" }}
                     />
+
                     <span className="text-white">{user.username}</span>
                   </span>
                 }

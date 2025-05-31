@@ -123,9 +123,17 @@ export const AuthProvider = ({ children }) => {
       if (updatedData.no_telp) formData.append("no_telp", updatedData.no_telp);
       if (updatedData.address) formData.append("address", updatedData.address);
 
-      // 🛠 perbaikan penamaan dan pengecekan file
-      if (updatedData.profile_picture instanceof File) {
-        formData.append("profile_picture", updatedData.profile_picture);
+      // Ganti dari 'avatar' ke 'profile_picture' (SINKRON DENGAN BACKEND)
+      if (updatedData.avatar instanceof File) {
+        console.log("📸 Mengirim file:", updatedData.avatar.name);
+        formData.append("profile_picture", updatedData.avatar);
+      } else {
+        console.log("⚠️ Tidak ada file avatar yang valid");
+      }
+
+      // Log form data
+      for (let [key, value] of formData.entries()) {
+        console.log("📝 FormData:", key, value);
       }
 
       const response = await api.patch(`/users/profile`, formData, {
