@@ -145,6 +145,128 @@ const CameraCapture = () => {
     }
   };
 
+  const handleSubmitImage = async () => {
+    const imageToSubmit = capturedImage || fileImage;
+    if (!imageToSubmit) {
+      alert("Tidak ada gambar yang dipilih atau diambil.");
+      return;
+    }
+
+    if (!meatType) {
+      alert("Silakan pilih jenis daging terlebih dahulu.");
+      return;
+    }
+
+    console.log("📤 Mulai submit gambar...");
+    console.log("🟢 Jenis daging yang dipilih:", meatType);
+
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const blob = await fetch(imageToSubmit).then((r) => r.blob());
+      const formData = new FormData();
+      formData.append("file", blob, "meat-image.jpg");
+      formData.append("meat_type", meatType);
+      formData.append("user_id", 1); // sementara
+
+      console.log("📤 Mengirim ke ML server dengan formData:");
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
+
+      const response = await axios.post(
+        "https://meatwatchmodel-production.up.railway.app/predict",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const prediction =
+        response.data.prediction || response.data.result || "Unknown";
+      let confidence = 0;
+
+      if (response.data.confidence) {
+        confidence = response.data.confidence;
+      } else if (response.data.probability) {
+        confidence = response.data.probability;
+      } else if (response.data["probability (%)"]) {
+        confidence = response.data["probability (%)"] / 100;
+      }
+
+      console.log("✅ Hasil prediksi dari ML:", prediction);
+      console.log(
+        "🔢 Tingkat kepercayaan:",
+        (confidence * 100).toFixed(2) + "%"
+      );
+
+      // Simpan ke backend Express
+      try {
+        // console.log("🔐 userData dari localStorage:", userData);
+        // const userData = JSON.parse(localStorage.getItem("user"));
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("User belum login");
+        }
+
+        const historyFormData = new FormData();
+        historyFormData.append("image_beef", blob, "meat-image.jpg");
+        historyFormData.append("meat_type", meatType);
+        historyFormData.append("status", prediction);
+        historyFormData.append("confidence", confidence.toString());
+
+        console.log("📝 Data yang dikirim ke backend:");
+        for (let pair of historyFormData.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
+        }
+
+        await axios.post(
+          "http://localhost:3000/classifications",
+          historyFormData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log("📦 Data klasifikasi berhasil disimpan ke backend.");
+      } catch (saveError) {
+        console.error("❌ Gagal menyimpan riwayat ke backend:", saveError);
+      }
+
+      const result = {
+        analysis: {
+          result: prediction,
+          confidence: confidence,
+          message:
+            prediction === "Segar" || prediction === "Fresh"
+              ? "Daging ini terlihat segar dan aman untuk dikonsumsi."
+              : "Daging ini terlihat tidak segar, disarankan untuk tidak dikonsumsi.",
+        },
+      };
+
+      setClassificationResult(result);
+      setSubmittedImage(imageToSubmit);
+
+      const consoleResult = {
+        prediction: prediction,
+        "probability (%)": (confidence * 100).toFixed(2),
+      };
+      console.log("📊 Classification result:", consoleResult);
+    } catch (err) {
+      console.error("❌ Error submitting image:", err);
+      setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // const handleSubmitImage = async () => {
   //   const imageToSubmit = capturedImage || fileImage;
   //   if (!imageToSubmit) {
@@ -161,15 +283,14 @@ const CameraCapture = () => {
   //   setError(null);
 
   //   try {
-  //     // Convert data URL to blob
   //     const blob = await fetch(imageToSubmit).then((r) => r.blob());
   //     const formData = new FormData();
-  //     formData.append("image", blob, "meat-image.jpg");
+  //     formData.append("file", blob, "meat-image.jpg");
   //     formData.append("meat_type", meatType);
   //     formData.append("user_id", 1); // Replace with actual user ID from auth
 
   //     const response = await axios.post(
-  //       "http://localhost:3001/upload-classification",
+  //       "https://meatwatchmodel-production.up.railway.app/predict",
   //       formData,
   //       {
   //         headers: {
@@ -178,9 +299,47 @@ const CameraCapture = () => {
   //       }
   //     );
 
-  //     setClassificationResult(response.data);
+  //     // Debugging: Tampilkan seluruh respons di console
+  //     console.log("Full API response:", response.data);
+
+  //     // Pastikan kita mengambil data yang benar dari respons
+  //     const prediction =
+  //       response.data.prediction || response.data.result || "Unknown";
+  //     let confidence = 0;
+
+  //     // Cek berbagai kemungkinan field yang mungkin berisi nilai confidence
+  //     if (response.data.confidence) {
+  //       confidence = response.data.confidence;
+  //     } else if (response.data.probability) {
+  //       confidence = response.data.probability;
+  //     } else if (response.data["probability (%)"]) {
+  //       confidence = response.data["probability (%)"] / 100;
+  //     }
+
+  //     // Format hasil untuk state
+  //     const result = {
+  //       analysis: {
+  //         result: prediction,
+  //         confidence: confidence,
+  //         message:
+  //           prediction === "Segar" || prediction === "Fresh"
+  //             ? "Daging ini terlihat segar dan aman untuk dikonsumsi."
+  //             : "Daging ini terlihat tidak segar, disarankan untuk tidak dikonsumsi.",
+  //       },
+  //     };
+
+  //     setClassificationResult(result);
   //     setSubmittedImage(imageToSubmit);
-  //     console.log("Classification result:", response.data);
+
+  //     // Step 2: Simpan hasil klasifikasi ke database backend
+
+  //     // Format untuk console.log
+  //     const consoleResult = {
+  //       prediction: prediction,
+  //       "probability (%)": (confidence * 100).toFixed(2),
+  //     };
+
+  //     console.log("Classification result:", consoleResult);
   //   } catch (err) {
   //     console.error("Error submitting image:", err);
   //     setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
@@ -188,106 +347,6 @@ const CameraCapture = () => {
   //     setIsSubmitting(false);
   //   }
   // };
-
-  const handleSubmitImage = async () => {
-    const imageToSubmit = capturedImage || fileImage;
-    if (!imageToSubmit) {
-      alert("Tidak ada gambar yang dipilih atau diambil.");
-      return;
-    }
-
-    if (!meatType) {
-      alert("Silakan pilih jenis daging terlebih dahulu.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setError(null);
-
-    try {
-      // // ======================================================
-      // // LOCAL MOCK MODE - comment this block when using server
-      // // Convert data URL to blob for consistent interface
-      // const blob = await fetch(imageToSubmit).then((r) => r.blob());
-      // const formData = new FormData();
-      // formData.append("image", blob, "meat-image.jpg");
-      // formData.append("meat_type", meatType);
-      // formData.append("user_id", 1);
-
-      // // Use mock API instead of real API call
-      // const mockResult = await mockApi.classifyMeat(formData);
-      // setClassificationResult(mockResult);
-      // setSubmittedImage(imageToSubmit);
-      // console.log("Mock classification result:", mockResult);
-      // // ======================================================
-
-      // ======================================================
-      // SERVER MODE - uncomment this block when using real server
-
-      // Convert data URL to blob
-
-      const blob = await fetch(imageToSubmit).then((r) => r.blob());
-      const formData = new FormData();
-      formData.append("file", blob, "meat-image.jpg");
-      formData.append("meat_type", meatType);
-      formData.append("user_id", 1); // Replace with actual user ID from auth
-
-      const response = await axios.post(
-        "https://meatwatchmodel-production.up.railway.app/predict",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // Debugging: Tampilkan seluruh respons di console
-      console.log("Full API response:", response.data);
-
-      // Pastikan kita mengambil data yang benar dari respons
-      const prediction =
-        response.data.prediction || response.data.result || "Unknown";
-      let confidence = 0;
-
-      // Cek berbagai kemungkinan field yang mungkin berisi nilai confidence
-      if (response.data.confidence) {
-        confidence = response.data.confidence;
-      } else if (response.data.probability) {
-        confidence = response.data.probability;
-      } else if (response.data["probability (%)"]) {
-        confidence = response.data["probability (%)"] / 100;
-      }
-
-      // Format hasil untuk state
-      const result = {
-        analysis: {
-          result: prediction,
-          confidence: confidence,
-          message:
-            prediction === "Segar" || prediction === "Fresh"
-              ? "Daging ini terlihat segar dan aman untuk dikonsumsi."
-              : "Daging ini terlihat tidak segar, disarankan untuk tidak dikonsumsi.",
-        },
-      };
-
-      setClassificationResult(result);
-      setSubmittedImage(imageToSubmit);
-
-      // Format untuk console.log
-      const consoleResult = {
-        prediction: prediction,
-        "probability (%)": (confidence * 100).toFixed(2),
-      };
-
-      console.log("Classification result:", consoleResult);
-    } catch (err) {
-      console.error("Error submitting image:", err);
-      setError("Gagal mengklasifikasikan gambar. Silakan coba lagi.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <Container className="py-4 mt-4">
@@ -385,7 +444,7 @@ const CameraCapture = () => {
           </Col>
         )}
 
-        {/* <Col md={12} className="mb-3">
+        <Col md={12} className="mb-3">
           <Form.Group controlId="meatTypeSelect">
             <Form.Label>Pilih Jenis Daging:</Form.Label>
             <Form.Select
@@ -398,7 +457,7 @@ const CameraCapture = () => {
               <option value="fish">Daging Ikan</option>
             </Form.Select>
           </Form.Group>
-        </Col> */}
+        </Col>
 
         <Col className="text-center mb-4 animate__animated animate__fadeInUp animate__delay-1s">
           <Row className="gx-3 gy-2 justify-content-center">

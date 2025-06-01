@@ -123,15 +123,14 @@ export const AuthProvider = ({ children }) => {
       if (updatedData.no_telp) formData.append("no_telp", updatedData.no_telp);
       if (updatedData.address) formData.append("address", updatedData.address);
 
-      // Ganti dari 'avatar' ke 'profile_picture' (SINKRON DENGAN BACKEND)
       if (updatedData.avatar instanceof File) {
         console.log("📸 Mengirim file:", updatedData.avatar.name);
         formData.append("profile_picture", updatedData.avatar);
-      } else {
-        console.log("⚠️ Tidak ada file avatar yang valid");
+      } else if (updatedData.avatar === "" || updatedData.avatar === null) {
+        console.log("🗑️ Menghapus avatar");
+        formData.append("remove_avatar", "true");
       }
 
-      // Log form data
       for (let [key, value] of formData.entries()) {
         console.log("📝 FormData:", key, value);
       }

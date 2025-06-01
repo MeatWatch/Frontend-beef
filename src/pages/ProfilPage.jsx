@@ -10,7 +10,8 @@ const ProfilePage = () => {
     email: user?.email || "",
     no_telp: user?.no_telp || "",
     address: user?.address || "",
-    avatar: user?.profile_picture || "",
+    avatar: user?.profile_picture || "", // Simpan hanya nama file
+    avatarFile: null, // Untuk file baru
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -55,7 +56,11 @@ const ProfilePage = () => {
   };
 
   const handleRemoveImage = () => {
-    setFormData((prev) => ({ ...prev, avatar: "" }));
+    setFormData((prev) => ({
+      ...prev,
+      avatar: "", // hapus file avatar
+      avatarPreview: getDefaultAvatar(), // ganti ke default avatar
+    }));
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -75,6 +80,24 @@ const ProfilePage = () => {
     }
   };
 
+  const getDefaultAvatar = () =>
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      formData.username || user?.username || ""
+    )}&background=dc3545&color=fff&size=120`;
+
+  const getAvatarUrl = () => {
+    if (isEditing && formData.avatarPreview) {
+      return formData.avatarPreview; // preview file atau default avatar kalau di-remove
+    }
+    if (formData.avatar && isEditing && typeof formData.avatar === "string") {
+      return `http://localhost:3000/images/users/${formData.avatar}`;
+    }
+    if (user?.profile_picture) {
+      return `http://localhost:3000/images/users/${user.profile_picture}`;
+    }
+    return getDefaultAvatar();
+  };
+
   return (
     <div className="min-h-screen py-4 pt-5 bg-light">
       <div className="container pt-5" style={{ maxWidth: "600px" }}>
@@ -87,20 +110,7 @@ const ProfilePage = () => {
               <div className="text-center mb-4">
                 <div className="position-relative d-inline-block">
                   <img
-                    src={
-                      isEditing
-                        ? formData.avatarPreview ||
-                          (formData.avatar?.startsWith?.("data:image")
-                            ? formData.avatar
-                            : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                user?.username || ""
-                              )}&background=dc3545&color=fff&size=120`)
-                        : user?.profile_picture
-                        ? `http://localhost:3000/images/users/${user.profile_picture}`
-                        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            user?.username || ""
-                          )}&background=dc3545&color=fff&size=120`
-                    }
+                    src={getAvatarUrl()}
                     alt="Profile"
                     className="rounded-circle mb-3"
                     style={{

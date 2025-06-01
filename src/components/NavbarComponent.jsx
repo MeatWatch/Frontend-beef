@@ -85,7 +85,16 @@ const NavbarComponent = () => {
                       style={{ objectFit: "cover" }}
                     />
 
-                    <span className="text-white">{user.username}</span>
+                    <span
+                      className="text-white text-truncate ms-2"
+                      style={{
+                        maxWidth: "120px",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {user.username}
+                    </span>
                   </span>
                 }
                 id="user-dropdown"
