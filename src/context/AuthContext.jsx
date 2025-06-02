@@ -88,12 +88,7 @@ export const AuthProvider = ({ children }) => {
       const { confirmPassword, ...registrationData } = userData;
       const response = await api.post("/users/register", registrationData);
 
-      const { token, user } = response.data;
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      setUser(user);
-      return user;
+      return response.data.message || "Registration successful";
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       throw err;
