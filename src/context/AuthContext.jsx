@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [initialized, setInitialized] = useState(false);
 
-  // ✅ Cek apakah token expired
+  // Cek apakah token expired
   const isTokenExpired = (token) => {
     try {
       const decoded = jwtDecode(token);
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Setup awal saat aplikasi dimuat
+  // Setup awal saat aplikasi dimuat
   useEffect(() => {
     const initializeAuth = () => {
       const token = localStorage.getItem("token");
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     initializeAuth();
   }, []);
 
-  // ✅ Login
+  // Login
   const login = async (credentials) => {
     setLoading(true);
     setError(null);
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Register
+  //  Register
   const register = async (userData) => {
     setLoading(true);
     setError(null);
@@ -102,14 +102,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Logout
+  //  Logout
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   };
 
-  // ✅ Update profile
+  //  Update profile
   const updateUser = async (updatedData) => {
     setLoading(true);
     setError(null);
@@ -182,7 +182,7 @@ export const AuthProvider = ({ children }) => {
       throw err;
     }
   };
-  // ✅ Update user context (manual override)
+  //  Update user context (manual override)
   const updateUserContext = (newUserData) => {
     const updatedUser = { ...user, ...newUserData };
     setUser(updatedUser);

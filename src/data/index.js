@@ -392,7 +392,6 @@ export const teamMembers = [
       { platform: "github", url: "https://github.com/Agungpurr" },
     ],
   },
-  // ... (add 5 more team members)
 ];
 
 // NEW DATA: Meat Watch Information
@@ -494,18 +493,38 @@ export const storageGuidelines = [
 export const scanGuide = [
   {
     step: "1. Siapkan Daging",
-    description:
-      "Pastikan daging yang akan dipindai diletakkan di permukaan datar dengan pencahayaan yang cukup. Hindari bayangan atau cahaya yang terlalu terang.",
+    description:[
+      "Letakkan daging pada permukaan datar yang bersih. ",
+      "Pastikan pencahayaan cukup dan merata.",
+      "Hindari bayangan atau cahaya berlebih yang bisa mengganggu hasil scan.",
+      "Jangan gunakan plastik atau wadah saat memindai, agar kamera menangkap tekstur asli daging."
+    ]
   },
   {
     step: "2. Gunakan Kamera",
-    description:
-      "Arahkan kamera ke daging dengan jelas. Pastikan keseluruhan bagian daging terlihat dalam frame. Hindari gambar blur.",
+    description:[
+      "Gunakan kamera perangkat Anda dan arahkan ke daging.",
+      "Pastikan seluruh bagian daging terlihat di layar (frame).",
+      "Jaga jarak agar tidak terlalu dekat atau terlalu jauh.",
+      "Hindari goyangan agar gambar tidak blur.",
+    ]
   },
   {
     step: "3. Tunggu Hasil",
-    description:
-      "Setelah gambar diambil, sistem akan menganalisis tingkat kesegaran daging dan memberikan saran penyimpanan.",
+    description:[
+      "Sistem akan memproses dan menganalisis tingkat kesegaran daging secara otomatis.",
+      "Website akan menampilkan kesegaran daging sesuai persentase keyakinan website",
+      "Hasil Klafikasi kesegaran dapat bervariasi tergantung pada kuallitas saat pengambilan gambar",
+    ]
+  },
+  {
+    step: "💡 Tips Tambahan",
+    description: [
+      "Gunakan latar belakang putih atau netral.",
+      "Jangan gunakan daging beku (tunggu suhu ruang).",
+      "Bersihkan kamera sebelum digunakan.",
+      "Jaga kestabilan tangan saat memindai.",
+    ],
   },
 ];
 

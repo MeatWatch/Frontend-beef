@@ -19,7 +19,7 @@ const FooterComponent = () => {
               MeatWatch.
             </h3>
             <p className="desc text-white-80">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Memantau kualitas daging terbaik untuk Anda.
             </p>
             <div className="contact mb-1 mt-4">
               <Link className="text-decoration-none text-white-90">

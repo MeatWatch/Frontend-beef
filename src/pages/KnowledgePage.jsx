@@ -81,26 +81,43 @@ const KnowledgePage = () => {
             </Col>
           </Row>
 
-          {/* Panduan Menggunakan Fitur Scan */}
-          <Row className="mt-5">
-            <Col>
-              <h2 className="text-center fw-bold mb-4 text-danger">
-                Cara Menggunakan Fitur Scan
-              </h2>
-              <Row className="g-4">
-                {scanGuide.map((step, index) => (
-                  <Col key={index} md={4}>
-                    <Card className="h-100 shadow-sm border-0">
-                      <Card.Body>
-                        <h5 className="fw-bold">{step.step}</h5>
-                        <p>{step.description}</p>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Col>
-          </Row>
+       {/* Scan Guide Section */}
+<Row className="mb-5 animate__animated animate__fadeIn">
+  <Col>
+    <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
+      Cara Menggunakan Fitur Scan
+    </h2>
+    <Row className="g-4">
+      {scanGuide.map((item, index) => (
+        <Col
+          key={index}
+          md={6}
+          className="animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          <Card className="h-100 shadow-sm border-0">
+            <Card.Header className="bg-white border-0 d-flex align-items-center gap-2">
+              <i className={`fas ${item.icon} text-danger`}></i>
+              <h5 className="mb-0 fw-bold">{item.step}</h5>
+            </Card.Header>
+            <Card.Body>
+              {Array.isArray(item.description) ? (
+                <ul className="mb-0">
+                  {item.description.map((tip, i) => (
+                    <li key={i}>{tip}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{item.description}</p>
+              )}
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
+  </Col>
+</Row>
+
+
 
           {/* Disclaimer */}
           <Row className="mt-4">
