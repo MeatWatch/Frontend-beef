@@ -81,8 +81,11 @@ const KnowledgePage = () => {
             </Col>
           </Row>
 
-       {/* Scan Guide Section */}
-<Row className="mb-5 animate__animated animate__fadeIn">
+      {/* Scan Guide Section */}
+<Row
+  className="mb-5 animate__animated animate__fadeIn"
+  style={{ marginTop: "60px" }}
+>
   <Col>
     <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
       Cara Menggunakan Fitur Scan
@@ -116,6 +119,7 @@ const KnowledgePage = () => {
     </Row>
   </Col>
 </Row>
+
 
 
 

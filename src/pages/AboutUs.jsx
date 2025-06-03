@@ -159,9 +159,8 @@ const AboutUsPage = () => {
                 silakan hubungi kami melalui:
               </p>
               <ul>
-                <li>Email: support@meatwatch.id</li>
-                <li>Telepon: +62 21 1234 5678</li>
-                <li>Alamat: Jl. Teknologi No. 123, Jakarta Selatan</li>
+                <li>meatwatchcc25cf130@gmail.com</li>
+                <li>Telepon: +62 087-098-980</li>
               </ul>
             </Col>
           </Row>

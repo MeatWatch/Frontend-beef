@@ -263,7 +263,7 @@ export const faq = [
     id: 3,
     eventKey: 2,
     title: "Apakah Bisa Digunakan untuk Semua Jenis Daging?",
-    desc: "Saat ini, aplikasi Meat Watch difokuskan untuk mendeteksi kualitas daging sapi dan ayam. Namun, kami terus mengembangkan teknologi agar dapat mendukung jenis daging lain seperti kambing, bebek, dan ikan di versi mendatang. Pastikan Anda selalu memperbarui aplikasi untuk mendapatkan fitur terbaru dan akurasi yang lebih luas.",
+    desc: "Saat ini, aplikasi Meat Watch difokuskan untuk mendeteksi kualitas daging sapi, ayam, dan ikan. Kami terus berupaya meningkatkan akurasi dan fitur dalam mendeteksi ketiga jenis daging tersebut. Pastikan Anda selalu memperbarui aplikasi untuk mendapatkan performa terbaik",
   },
   {
     id: 4,
@@ -293,7 +293,7 @@ export const faq = [
     id: 8,
     eventKey: 7,
     title: "Apakah Bisa Ganti Jenis Pemeriksaan Setelah Memilih?",
-    desc: "Ya, Anda bisa mengganti jenis pemeriksaan kapan saja sebelum proses analisis dimulai. Jika Anda sudah memilih jenis daging namun ingin mengubahnya, cukup kembali ke halaman sebelumnya atau gunakan opsi “Ubah Jenis Daging” di layar pemindaian. Fleksibilitas ini memudahkan Anda untuk mendapatkan hasil yang sesuai dengan jenis daging yang dianalisis.",
+    desc: "Ya, Anda bisa mengganti jenis daging kapan saja sebelum proses analisis dimulai Jika Anda sudah memilih tapi ingin mengubahnya, cukup kembali ke halaman sebelumnya atau tekan tombol Ubah Jenis Daging yang tersedia di layar.",
   },
 ];
 

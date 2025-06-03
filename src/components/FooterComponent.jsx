@@ -30,7 +30,7 @@ const FooterComponent = () => {
             <div className="contact">
               <Link className="text-decoration-none text-white-90">
                 <i className="fa-regular fa-envelope me-2"></i>
-                <p className="m-0 d-inline">freshMeat@gmail.com</p>
+                <p className="m-0 d-inline">meatwatchcc25cf130@gmail.com</p>
               </Link>
             </div>
           </Col>
@@ -40,10 +40,10 @@ const FooterComponent = () => {
               Home
             </Link>
             <Link to="kelas" className="text-white-90 mb-2">
-              List
+              Information
             </Link>
             <Link to="testimonial" className="text-white-90 mb-2">
-              Testimonial
+              Knowledge
             </Link>
             <Link to="faq" className="text-white-90 mb-2">
               FAQ
@@ -68,8 +68,7 @@ const FooterComponent = () => {
               </button>
             </div>
             <div className="social mt-4">
-              <i className="fab fa-facebook me-3"></i>
-              <i className="fab fa-twitter me-3"></i>
+             
               <i className="fab fa-linkedin me-3"></i>
               <i className="fab fa-youtube"></i>
             </div>
