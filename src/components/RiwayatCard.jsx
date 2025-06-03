@@ -24,7 +24,7 @@ const RiwayatCard = ({ item, onViewDetails, onDelete }) => {
             <img
               src={
                 item.classifyId && item.image_beef
-                  ? `http://localhost:3000/${item.image_beef.replace(
+                  ? `https://backend-meatwatch-production.up.railway.app/${item.image_beef.replace(
                       /\\/g,
                       "/"
                     )}`

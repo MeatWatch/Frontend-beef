@@ -90,10 +90,10 @@ const ProfilePage = () => {
       return formData.avatarPreview; // preview file atau default avatar kalau di-remove
     }
     if (formData.avatar && isEditing && typeof formData.avatar === "string") {
-      return `http://localhost:3000/images/users/${formData.avatar}`;
+      return `https://backend-meatwatch-production.up.railway.app/images/users/${formData.avatar}`;
     }
     if (user?.profile_picture) {
-      return `http://localhost:3000/images/users/${user.profile_picture}`;
+      return `https://backend-meatwatch-production.up.railway.app/images/users/${user.profile_picture}`;
     }
     return getDefaultAvatar();
   };
@@ -224,7 +224,7 @@ const ProfilePage = () => {
                 <img
                   src={
                     user?.avatar || user?.profile_picture
-                      ? `http://localhost:3000/images/users/${user.profile_picture}`
+                      ? `https://backend-meatwatch-production.up.railway.app/images/users/${user.profile_picture}`
                       : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                           user?.username || ""
                         )}&background=dc3545&color=fff&size=120`

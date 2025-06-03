@@ -36,7 +36,7 @@ const RiwayatPage = () => {
         }
 
         const response = await axios.get(
-          "http://localhost:3000/classifications/history",
+          "https://backend-meatwatch-production.up.railway.app/classifications/history",
           {
             params: { user_id: user.user_id },
             headers: {
@@ -47,7 +47,8 @@ const RiwayatPage = () => {
 
         const validData = response.data.data.map((item) => ({
           ...item,
-          created_at: parseDate(item.created_at),
+          created_at: parseDate(item.createdAt),
+          reminderDate: parseDate(item.reminderDate),
         }));
         console.log(response.data);
 
@@ -108,6 +109,7 @@ const RiwayatPage = () => {
 
   const formatDate = (date) => {
     const options = {
+      timeZone: "Asia/Jakarta",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -203,6 +205,10 @@ const RiwayatPage = () => {
               <p>
                 <strong>Created At:</strong>{" "}
                 {formatDate(selectedClassification.created_at)}
+              </p>
+              <p>
+                <strong>Reminder Date:</strong>{" "}
+                {formatDate(selectedClassification.reminderDate)}
               </p>
               <hr />
             </>

@@ -73,7 +73,7 @@ const NavbarComponent = () => {
                     <Image
                       src={
                         user?.profile_picture
-                          ? `http://localhost:3000/images/users/${user.profile_picture}`
+                          ? `https://backend-meatwatch-production.up.railway.app/images/users/${user.profile_picture}`
                           : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                               user.username
                             )}&background=dc3545&color=fff&size=120`

@@ -225,7 +225,7 @@ const CameraCapture = () => {
         }
 
         await axios.post(
-          "http://localhost:3000/classifications",
+          "https://backend-meatwatch-production.up.railway.app/classifications",
           historyFormData,
           {
             headers: {

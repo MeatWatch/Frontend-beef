@@ -2,7 +2,9 @@ import axios from "axios";
 
 // Buat instance axios dengan baseURL dari .env atau fallback ke localhost
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    "https://backend-meatwatch-production.up.railway.app",
   headers: {
     "Content-Type": "application/json",
   },
