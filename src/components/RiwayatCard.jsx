@@ -5,15 +5,21 @@ const RiwayatCard = ({ item, onViewDetails, onDelete }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [reminderTime, setReminderTime] = useState("");
 
-  const formatDate = (dateString) => {
+  const formatDate = (date) => {
+    const adjustedDate = new Date(date);
+    adjustedDate.setHours(adjustedDate.getHours() - 7);
+
     const options = {
       year: "numeric",
-      month: "short",
+      month: "long",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
     };
-    return new Date(dateString).toLocaleDateString("id-ID", options);
+
+    return adjustedDate.toLocaleDateString("id-ID", options);
   };
 
   return (

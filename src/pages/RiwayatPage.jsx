@@ -108,16 +108,20 @@ const RiwayatPage = () => {
   );
 
   const formatDate = (date) => {
+    const adjustedDate = new Date(date);
+    adjustedDate.setHours(adjustedDate.getHours() - 7);
+
     const options = {
-      timeZone: "Asia/Jakarta",
       year: "numeric",
       month: "long",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
+      hour12: false,
     };
-    return date.toLocaleDateString("id-ID", options);
+
+    return adjustedDate.toLocaleDateString("id-ID", options);
   };
 
   return (
