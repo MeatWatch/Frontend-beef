@@ -78,7 +78,7 @@ const KnowledgePage = () => {
           </Row>
 
           {/* Scan Guide Section */}
-          <Row className="mb-5 pt-5 animate__animated animate__fadeIn">
+          <Row className="mb-5 animate__animated animate__fadeIn">
             <Col>
               <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
                 Cara Menggunakan Fitur Scan

@@ -42,8 +42,8 @@ const FooterComponent = () => {
             <Link to="kelas" className="text-white-90 mb-2">
               Information
             </Link>
-            <Link to="knowledge" className="text-white-90 mb-2">
-              Knowledge
+            <Link to="testimonial" className="text-white-90 mb-2">
+              Testimonial
             </Link>
             <Link to="faq" className="text-white-90 mb-2">
               FAQ
@@ -68,8 +68,6 @@ const FooterComponent = () => {
               </button>
             </div>
             <div className="social mt-4">
-              <i className="fab fa-facebook me-3"></i>
-              <i className="fab fa-twitter me-3"></i>
               <i className="fab fa-linkedin me-3"></i>
               <i className="fab fa-youtube"></i>
             </div>
