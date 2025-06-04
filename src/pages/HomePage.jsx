@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import HeroImage from "../assets/img/meat3.png";
 
 import { kelasTerbaru, dataSwiper } from "../data/index";
 import { useNavigate } from "react-router-dom";
@@ -63,11 +62,7 @@ const HomePage = () => {
               </button>
             </Col>
             <Col lg="6" className="pt-lg-0 pt-5">
-              <img
-                src={HeroImage}
-                alt="beef-img"
-                className="animate__animated animate__fadeInUp"
-              />
+              <img src="meat3.png" alt="beef-img" />
             </Col>
           </Row>
         </Container>

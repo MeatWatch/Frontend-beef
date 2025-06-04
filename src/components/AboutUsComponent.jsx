@@ -10,22 +10,22 @@ const AboutUsComponent = () => {
         {/* About Meat Watch Section */}
         <Row className="mb-5 animate__animated animate__fadeIn">
           <Col>
-            <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp animate__delay-1s">
+            <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp animate__delay-0.5s">
               Tentang Meat Watch
             </h2>
-            <Card className="shadow-sm border-0 animate__animated animate__fadeInUp animate__delay-1s">
+            <Card className="shadow-sm border-0 animate__animated animate__fadeInUp animate__delay-0.5s">
               <Card.Body>
                 <p className="lead">{meatWatchInfo.about}</p>
 
                 <h5 className="mt-4 text-danger">Fitur Unggulan:</h5>
-                <ul className="animate__animated animate__fadeIn animate__delay-2s">
+                <ul className="animate__animated animate__fadeIn animate__delay-0.3s">
                   {meatWatchInfo.features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
                 </ul>
 
                 <h5 className="mt-4 text-danger">Cara Menggunakan:</h5>
-                <ol className="animate__animated animate__fadeIn animate__delay-2s">
+                <ol className="animate__animated animate__fadeIn animate__delay-0.3s">
                   {meatWatchInfo.howToUse.map((step, index) => (
                     <li key={index}>{step}</li>
                   ))}
@@ -42,10 +42,7 @@ const AboutUsComponent = () => {
               Visi & Misi
             </h2>
             <Row className="g-4">
-              <Col
-                md={6}
-                className="animate__animated animate__fadeInLeft animate__delay-1s"
-              >
+              <Col md={6}>
                 <Card className="h-100 shadow-sm border-0">
                   <Card.Header className="bg-danger text-white">
                     <h5 className="mb-0">Visi</h5>
@@ -59,10 +56,7 @@ const AboutUsComponent = () => {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col
-                md={6}
-                className="animate__animated animate__fadeInRight animate__delay-1s"
-              >
+              <Col md={6}>
                 <Card className="h-100 shadow-sm border-0">
                   <Card.Header className="bg-danger text-white">
                     <h5 className="mb-0">Misi</h5>
@@ -124,19 +118,17 @@ const AboutUsComponent = () => {
                           objectFit: "cover",
                         }}
                         alt={member.name}
-                        className="border border-danger animate__animated animate__pulse animate__delay-1s"
+                        className="border border-danger "
                       />
                     </div>
                     <Card.Body className="text-center">
                       <Card.Title className="fw-bold animate__animated animate__fadeIn">
                         {member.name}
                       </Card.Title>
-                      <Card.Subtitle className="mb-2 text-danger animate__animated animate__fadeIn animate__delay-1s">
+                      <Card.Subtitle className="mb-2 text-danger ">
                         {member.role}
                       </Card.Subtitle>
-                      <Card.Text className="animate__animated animate__fadeIn animate__delay-2s">
-                        {member.bio}
-                      </Card.Text>
+                      <Card.Text>{member.bio}</Card.Text>
 
                       {/* Social Media Icons */}
                       <div className="d-flex justify-content-center gap-2 mt-3">

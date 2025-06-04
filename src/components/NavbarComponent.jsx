@@ -29,7 +29,7 @@ const NavbarComponent = () => {
       <Container>
         <Navbar.Brand as={Link} to="/" className="fs-3 fw-bold text-white">
           <img
-            src="MeatWatch1(2).png"
+            src="favicon.png"
             alt="Logo"
             width="25"
             height="25"

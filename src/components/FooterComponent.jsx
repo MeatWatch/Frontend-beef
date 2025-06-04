@@ -9,7 +9,7 @@ const FooterComponent = () => {
           <Col lg="5">
             <h3 className="fw-bold text-white">
               <img
-                src="MeatWatch1(2).png"
+                src="favicon.png"
                 alt="Logo"
                 width="25"
                 height="25"
@@ -30,7 +30,7 @@ const FooterComponent = () => {
             <div className="contact">
               <Link className="text-decoration-none text-white-90">
                 <i className="fa-regular fa-envelope me-2"></i>
-                <p className="m-0 d-inline">freshMeat@gmail.com</p>
+                <p className="m-0 d-inline">meatwatchcc25cf130@gmail.com</p>
               </Link>
             </div>
           </Col>
@@ -40,15 +40,15 @@ const FooterComponent = () => {
               Home
             </Link>
             <Link to="kelas" className="text-white-90 mb-2">
-              List
+              Information
             </Link>
-            <Link to="testimonial" className="text-white-90 mb-2">
-              Testimonial
+            <Link to="knowledge" className="text-white-90 mb-2">
+              Knowledge
             </Link>
             <Link to="faq" className="text-white-90 mb-2">
               FAQ
             </Link>
-            <Link to="syaratketen" className="text-white-90">
+            <Link to="aboutus" className="text-white-90">
               About Us
             </Link>
           </Col>

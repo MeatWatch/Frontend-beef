@@ -38,7 +38,7 @@ const NotificationAlert = ({ onClose }) => {
         </p>
         <button
           className="notification-button"
-          onClick={() => navigate("/testimonial")}
+          onClick={() => navigate("/knowledge")}
         >
           Pelajari Lebih Lanjut!
         </button>

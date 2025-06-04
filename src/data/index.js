@@ -1,18 +1,3 @@
-import KelasImage1 from "../assets/img/kelas/beef-1.jpg";
-import KelasImage2 from "../assets/img/kelas/beef-2.jpg";
-import KelasImage3 from "../assets/img/kelas/beef-3.jpg";
-import KelasImage4 from "../assets/img/kelas/beef-4.jpg";
-import KelasImage5 from "../assets/img/kelas/beef-5.jpg";
-import KelasImage6 from "../assets/img/kelas/beef-6.jpg";
-import KelasImage7 from "../assets/img/kelas/beef-7.jpg";
-import KelasImage8 from "../assets/img/kelas/beef-8.jpg";
-import KelasImage9 from "../assets/img/kelas/beef-9.jpg";
-
-import People1 from "../assets/img/testimonial/people-1.jpg";
-import People2 from "../assets/img/testimonial/people-2.jpg";
-import People3 from "../assets/img/testimonial/people-3.jpg";
-import People4 from "../assets/img/testimonial/people-4.jpg";
-
 export const navLinks = [
   {
     id: 1,
@@ -26,7 +11,7 @@ export const navLinks = [
   },
   {
     id: 3,
-    path: "testimonial",
+    path: "knowledge",
     text: "Knowledge",
   },
   {
@@ -44,7 +29,7 @@ export const navLinks = [
 export const semuaKelas = [
   {
     id: 1,
-    image: KelasImage1,
+    image: "/image/kelas/beef-1.jpg",
     title: "Cara Menyimpan Daging Sapi dengan Benar",
     body: "Daging sapi segar sebaiknya disimpan dalam suhu 0-4°C...",
     fullBody:
@@ -55,7 +40,7 @@ export const semuaKelas = [
   },
   {
     id: 2,
-    image: KelasImage2,
+    image: "/image/kelas/beef-2.jpg",
     title: "Kandungan Nutrisi pada Daging Ayam",
     body: "Daging ayam kaya akan protein dan rendah lemak...",
     fullBody:
@@ -66,7 +51,7 @@ export const semuaKelas = [
   },
   {
     id: 3,
-    image: KelasImage3,
+    image: "/image/kelas/beef-3.jpg",
     title: "Cara Mengenali Ikan yang Segar dan tidak Segar ",
     body: "Ikan segar memiliki mata jernih, insang merah cerah...",
     fullBody:
@@ -77,7 +62,7 @@ export const semuaKelas = [
   },
   {
     id: 4,
-    image: KelasImage4,
+    image: "/image/kelas/beef-4.jpg",
     title: "Metode Penyimpanan Daging Terbaik",
     body: "Metode vacuum sealing dapat memperpanjang umur...",
     fullBody:
@@ -87,8 +72,19 @@ export const semuaKelas = [
     delay: "",
   },
   {
+    id: 5,
+    image: "/image/kelas/beef-5.jpg",
+    title: "Perbandingan Nutrisi Berbagai Jenis Daging",
+    body: "Daging merah mengandung lebih banyak zat besi dibandingkan...",
+    fullBody:
+      "Daging merah mengandung lebih banyak zat besi dibandingkan dengan daging putih, seperti ayam atau ikan. Zat besi yang terdapat pada daging merah juga merupakan bentuk zat besi heme, yang lebih mudah diserap oleh tubuh dibandingkan dengan zat besi non-heme yang terdapat pada tumbuhan. Selain itu, daging merah juga kaya akan protein berkualitas tinggi, vitamin B12, dan berbagai mineral lainnya yang penting untuk kesehatan tubuh, seperti zinc dan selenium.",
+    category: "beef",
+    get: "Lebih Lengkap",
+    delay: "300",
+  },
+  {
     id: 6,
-    image: KelasImage6,
+    image: "/image/kelas/beef-6.jpg",
     title: "Tips Memasak Daging Ayam agar Tetap Juicy",
     body: "Memasak ayam dengan cara yang tepat bisa menjaga tekstur dan rasa...",
     fullBody:
@@ -99,7 +95,7 @@ export const semuaKelas = [
   },
   {
     id: 7,
-    image: KelasImage7,
+    image: "/image/kelas/beef-7.jpg",
     title: "Manfaat Ikan Salmon untuk Kesehatan",
     body: "Ikan salmon dikenal sebagai sumber omega-3 yang tinggi...",
     fullBody:
@@ -110,7 +106,7 @@ export const semuaKelas = [
   },
   {
     id: 8,
-    image: KelasImage8,
+    image: "/image/kelas/beef-8.jpg",
     title: "Perbedaan Daging Sapi Lokal dan Impor",
     body: "Daging sapi lokal dan impor punya karakteristik berbeda...",
     fullBody:
@@ -121,7 +117,7 @@ export const semuaKelas = [
   },
   {
     id: 9,
-    image: KelasImage9,
+    image: "/image/kelas/beef-9.jpg",
     title: "Risiko Mengonsumsi Ikan Mentah yang Tidak Segar",
     body: "Ikan mentah yang tidak segar bisa membawa parasit dan bakteri...",
     fullBody:
@@ -135,7 +131,7 @@ export const semuaKelas = [
 export const kelasTerbaru = [
   {
     id: 1,
-    image: KelasImage1,
+    image: "/image/kelas/beef-1.jpg",
     title: "Cara Menyimpan Daging Sapi dengan Benar",
     body: "Daging sapi segar sebaiknya disimpan dalam suhu 0-4°C...",
     fullBody:
@@ -146,7 +142,7 @@ export const kelasTerbaru = [
   },
   {
     id: 2,
-    image: KelasImage2,
+    image: "/image/kelas/beef-2.jpg",
     title: "Kandungan Nutrisi pada Daging Ayam",
     body: "Daging ayam kaya akan protein dan rendah lemak...",
     fullBody:
@@ -157,7 +153,7 @@ export const kelasTerbaru = [
   },
   {
     id: 3,
-    image: KelasImage3,
+    image: "/image/kelas/beef-3.jpg",
     title: "Cara Mengenali Ikan yang Segar dan tidak segar",
     body: "Ikan segar memiliki mata jernih, insang merah cerah...",
     fullBody:
@@ -168,7 +164,7 @@ export const kelasTerbaru = [
   },
   {
     id: 4,
-    image: KelasImage4,
+    image: "/image/kelas/beef-4.jpg",
     title: "Metode Penyimpanan Daging Terbaik",
     body: "Metode vacuum sealing dapat memperpanjang umur...",
     fullBody:
@@ -179,7 +175,7 @@ export const kelasTerbaru = [
   },
   {
     id: 5,
-    image: KelasImage5,
+    image: "/image/kelas/beef-5.jpg",
     title: "Perbandingan Nutrisi Berbagai Jenis Daging",
     body: "Daging merah mengandung lebih banyak zat besi dibandingkan...",
     fullBody:
@@ -190,7 +186,7 @@ export const kelasTerbaru = [
   },
   {
     id: 6,
-    image: KelasImage6,
+    image: "/image/kelas/beef-6.jpg",
     title: "Cara Menyimpan Daging Sapi dengan Benar",
     body: "Daging sapi segar sebaiknya disimpan dalam suhu 0-4°C...",
     fullBody:
@@ -205,42 +201,42 @@ export const dataSwiper = [
   {
     id: 1,
     desc: "Aplikasi ini sangat membantu saya memastikan kualitas daging sebelum digunakan. Fitur deteksinya cepat dan akurat!",
-    image: People1,
+    image: "/image/testimonial/people-1.jpg",
     name: "Chef Amanda",
     skill: "Chef Profesional",
   },
   {
     id: 2,
     desc: "Sebelumnya saya harus cek manual satu per satu, sekarang cukup pakai aplikasi ini, Hemat waktu",
-    image: People2,
+    image: "/image/testimonial/people-2.jpg",
     name: "Pak Budi ",
     skill: "Penjual Daging",
   },
   {
     id: 3,
     desc: "Saya nggak perlu ragu lagi saat beli daging di pasar. Tinggal foto dan aplikasi langsung kasih tahu segar atau tidak.",
-    image: People1,
+    image: "/image/testimonial/people-3.jpg",
     name: "Ibu Rina 3",
     skill: "Ibu Rumah Tangga",
   },
   {
     id: 4,
     desc: "Sebuah inovasi yang luar biasa untuk mendukung keamanan pangan. Bisa jadi tools penting untuk edukasi masyarakat.",
-    image: People2,
+    image: "/image/testimonial/people-2.jpg",
     name: "Dr. Dimas",
     skill: "Peneliti Pangan",
   },
   {
     id: 5,
     desc: "Sangat membantu untuk tugas kampus saya tentang analisis kualitas pangan. Praktis dan mudah dipahami",
-    image: People1,
+    image: "/image/testimonial/people-1.jpg",
     name: "Nina",
     skill: "Mahasiswa Gizi",
   },
   {
     id: 6,
     desc: "Dengan aplikasi ini, stok daging di restoran saya selalu terkontrol kualitasnya, meminimalkan risiko komplain dari pelanggan  ",
-    image: People3,
+    image: "/image/testimonial/people-2.jpg",
     name: "Pak Arif",
     skill: "Pemilik Restoran",
   },
@@ -263,7 +259,7 @@ export const faq = [
     id: 3,
     eventKey: 2,
     title: "Apakah Bisa Digunakan untuk Semua Jenis Daging?",
-    desc: "Saat ini, aplikasi Meat Watch difokuskan untuk mendeteksi kualitas daging sapi dan ayam. Namun, kami terus mengembangkan teknologi agar dapat mendukung jenis daging lain seperti kambing, bebek, dan ikan di versi mendatang. Pastikan Anda selalu memperbarui aplikasi untuk mendapatkan fitur terbaru dan akurasi yang lebih luas.",
+    desc: "Saat ini, aplikasi Meat Watch difokuskan untuk mendeteksi kualitas daging sapi, ayam, dan ikan. Kami terus berupaya meningkatkan akurasi dan fitur dalam mendeteksi ketiga jenis daging tersebut. Pastikan Anda selalu memperbarui aplikasi untuk mendapatkan performa terbaik",
   },
   {
     id: 4,
@@ -293,7 +289,7 @@ export const faq = [
     id: 8,
     eventKey: 7,
     title: "Apakah Bisa Ganti Jenis Pemeriksaan Setelah Memilih?",
-    desc: "Ya, Anda bisa mengganti jenis pemeriksaan kapan saja sebelum proses analisis dimulai. Jika Anda sudah memilih jenis daging namun ingin mengubahnya, cukup kembali ke halaman sebelumnya atau gunakan opsi “Ubah Jenis Daging” di layar pemindaian. Fleksibilitas ini memudahkan Anda untuk mendapatkan hasil yang sesuai dengan jenis daging yang dianalisis.",
+    desc: "Ya, Anda bisa mengganti jenis daging kapan saja sebelum proses analisis dimulai Jika Anda sudah memilih tapi ingin mengubahnya, cukup kembali ke halaman sebelumnya atau tekan tombol Ubah Jenis Daging yang tersedia di layar.",
   },
 ];
 
@@ -304,7 +300,7 @@ export const teamMembers = [
     name: "Elvino Junior",
     role: "Founder & CEO",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -319,7 +315,7 @@ export const teamMembers = [
     name: "Robby Saidi",
     role: "Machine Learning",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -337,7 +333,7 @@ export const teamMembers = [
     name: "Muhammad Firdaus",
     role: "Machine Learning",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -352,7 +348,7 @@ export const teamMembers = [
     name: "Syuhada Aqlul Hafiz",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -367,7 +363,7 @@ export const teamMembers = [
     name: "Fahrul Alamsyah ",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -382,7 +378,7 @@ export const teamMembers = [
     name: "Agung Purnomo",
     role: "Fullstack Developer",
     bio: "Universitas Indraprasta PGRI",
-    image: People4,
+    image: "/image/testimonial/people-4.jpg",
     socialMedia: [
       {
         platform: "linkedin",
@@ -493,29 +489,29 @@ export const storageGuidelines = [
 export const scanGuide = [
   {
     step: "1. Siapkan Daging",
-    description:[
+    description: [
       "Letakkan daging pada permukaan datar yang bersih. ",
       "Pastikan pencahayaan cukup dan merata.",
       "Hindari bayangan atau cahaya berlebih yang bisa mengganggu hasil scan.",
-      "Jangan gunakan plastik atau wadah saat memindai, agar kamera menangkap tekstur asli daging."
-    ]
+      "Jangan gunakan plastik atau wadah saat memindai, agar kamera menangkap tekstur asli daging.",
+    ],
   },
   {
     step: "2. Gunakan Kamera",
-    description:[
+    description: [
       "Gunakan kamera perangkat Anda dan arahkan ke daging.",
       "Pastikan seluruh bagian daging terlihat di layar (frame).",
       "Jaga jarak agar tidak terlalu dekat atau terlalu jauh.",
       "Hindari goyangan agar gambar tidak blur.",
-    ]
+    ],
   },
   {
     step: "3. Tunggu Hasil",
-    description:[
+    description: [
       "Sistem akan memproses dan menganalisis tingkat kesegaran daging secara otomatis.",
       "Website akan menampilkan kesegaran daging sesuai persentase keyakinan website",
       "Hasil Klafikasi kesegaran dapat bervariasi tergantung pada kuallitas saat pengambilan gambar",
-    ]
+    ],
   },
   {
     step: "💡 Tips Tambahan",

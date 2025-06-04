@@ -18,26 +18,6 @@ const LoginPage = () => {
 
   return (
     <div className="login-page-container">
-      {/* Header with WatchMeat logo */}
-      <header className="login-header">
-        <div className="brand-logo">
-          <img
-            src="/MeatWatch1(2).png"
-            alt="WatchMeat Logo"
-            width="40"
-            className="logo-img"
-          />
-          <h1 className="brand-name">WatchMeat</h1>
-        </div>
-        <nav className="login-nav">
-          <a href="/">Home</a>
-          <a href="/list">List</a>
-          <a href="/testimonial">Testimonial</a>
-          <a href="/faq">FAQ</a>
-          <a href="/syaratketen">Syarat & Ketentuan</a>
-        </nav>
-      </header>
-
       {/* Main login form */}
       <main className="login-main-content">
         <div className="login-form-container">

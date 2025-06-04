@@ -19,14 +19,11 @@ const AboutUsPage = () => {
               <h1 className="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">
                 Tentang Kami
               </h1>
-              <p className="lead animate__animated animate__fadeIn animate__delay-1s">
+              <p className="lead animate__animated animate__fadeIn animate__delay-0.5s">
                 Meat Watch - Solusi Cerdas untuk Memastikan Kualitas Daging Anda
               </p>
             </Col>
-            <Col
-              md={6}
-              className="text-center animate__animated animate__fadeInRight order-md-2 order-1 mb-4 mb-md-0"
-            >
+            <Col md={6} className="text-center order-md-2 order-1 mb-4 mb-md-0">
               <img
                 src="/MeatWatch1.svg"
                 alt="Meat Watch Logo"
@@ -50,10 +47,10 @@ const AboutUsPage = () => {
                   alt="Meat Watch Logo"
                   style={{ height: "80px", marginBottom: "20px" }}
                 />
-                <h1 className="fw-bold text-center mb-2 animate__animated animate__fadeInUp animate__delay-1s">
+                <h1 className="fw-bold text-center mb-2 animate__animated animate__fadeInUp animate__delay-0.5s">
                   Syarat & Ketentuan
                 </h1>
-                <p className="text-center animate__animated animate__fadeInUp animate__delay-1s">
+                <p className="text-center animate__animated animate__fadeInUp animate__delay-0.5s">
                   Ketentuan penggunaan platform Meat Watch
                 </p>
               </div>
@@ -159,9 +156,8 @@ const AboutUsPage = () => {
                 silakan hubungi kami melalui:
               </p>
               <ul>
-                <li>Email: support@meatwatch.id</li>
-                <li>Telepon: +62 21 1234 5678</li>
-                <li>Alamat: Jl. Teknologi No. 123, Jakarta Selatan</li>
+                <li>meatwatchcc25cf130@gmail.com</li>
+                <li>Telepon: +62 087-098-980</li>
               </ul>
             </Col>
           </Row>

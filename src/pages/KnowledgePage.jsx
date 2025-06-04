@@ -28,12 +28,12 @@ const KnowledgePage = () => {
                     md={6}
                     className="animate__animated animate__fadeInUp animate__delay-1s"
                   >
-                    <Card className="h-100 shadow-sm border-0 animate__animated animate__flipInX">
+                    <Card className="h-100 shadow-sm border-0 ">
                       <Card.Header className="bg-danger text-white">
                         <h5 className="mb-0">{indicator.type}</h5>
                       </Card.Header>
                       <Card.Body>
-                        <ul className="animate__animated animate__fadeIn animate__delay-1s">
+                        <ul>
                           {indicator.indicators.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
@@ -49,21 +49,17 @@ const KnowledgePage = () => {
           {/* Storage Guidelines Section */}
           <Row className="animate__animated animate__fadeIn">
             <Col>
-              <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
+              <h2 className="text-center fw-bold mb-4 text-danger ">
                 Panduan Penyimpanan
               </h2>
               <Row className="g-4">
                 {storageGuidelines.map((guide, index) => (
-                  <Col
-                    key={index}
-                    md={6}
-                    className="animate__animated animate__fadeInUp animate__delay-1s"
-                  >
-                    <Card className="h-100 shadow-sm border-0 animate__animated animate__flipInY">
+                  <Col key={index} md={6}>
+                    <Card className="h-100 shadow-sm border-0 ">
                       <Card.Header className="bg-danger text-white">
                         <h5 className="mb-0">{guide.meatType}</h5>
                       </Card.Header>
-                      <Card.Body className="animate__animated animate__fadeIn animate__delay-1s">
+                      <Card.Body>
                         <p>
                           <strong>Kulkas:</strong> {guide.fridge}
                         </p>
@@ -81,43 +77,41 @@ const KnowledgePage = () => {
             </Col>
           </Row>
 
-       {/* Scan Guide Section */}
-<Row className="mb-5 animate__animated animate__fadeIn">
-  <Col>
-    <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
-      Cara Menggunakan Fitur Scan
-    </h2>
-    <Row className="g-4">
-      {scanGuide.map((item, index) => (
-        <Col
-          key={index}
-          md={6}
-          className="animate__animated animate__fadeInUp animate__delay-1s"
-        >
-          <Card className="h-100 shadow-sm border-0">
-            <Card.Header className="bg-white border-0 d-flex align-items-center gap-2">
-              <i className={`fas ${item.icon} text-danger`}></i>
-              <h5 className="mb-0 fw-bold">{item.step}</h5>
-            </Card.Header>
-            <Card.Body>
-              {Array.isArray(item.description) ? (
-                <ul className="mb-0">
-                  {item.description.map((tip, i) => (
-                    <li key={i}>{tip}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p>{item.description}</p>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
-  </Col>
-</Row>
-
-
+          {/* Scan Guide Section */}
+          <Row className="mb-5 pt-5 animate__animated animate__fadeIn">
+            <Col>
+              <h2 className="text-center fw-bold mb-4 text-danger animate__animated animate__fadeInUp">
+                Cara Menggunakan Fitur Scan
+              </h2>
+              <Row className="g-4">
+                {scanGuide.map((item, index) => (
+                  <Col
+                    key={index}
+                    md={6}
+                    className="animate__animated animate__fadeInUp animate__delay-1s"
+                  >
+                    <Card className="h-100 shadow-sm border-0">
+                      <Card.Header className="bg-white border-0 d-flex align-items-center gap-2">
+                        <i className={`fas ${item.icon} text-danger`}></i>
+                        <h5 className="mb-0 fw-bold">{item.step}</h5>
+                      </Card.Header>
+                      <Card.Body>
+                        {Array.isArray(item.description) ? (
+                          <ul className="mb-0">
+                            {item.description.map((tip, i) => (
+                              <li key={i}>{tip}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p>{item.description}</p>
+                        )}
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Col>
+          </Row>
 
           {/* Disclaimer */}
           <Row className="mt-4">

@@ -24,7 +24,7 @@ const RegisterPage = () => {
         <div className="register-card">
           <div className="text-center mb-4">
             <img
-              src="/MeatWatch1(2).png"
+              src="/MeatWatch1(1).png"
               alt="Logo"
               width="60"
               className="mb-3"

@@ -3,7 +3,7 @@ import NavbarComponent from "./components/NavbarComponent";
 import FooterComponent from "./components/FooterComponent";
 import HomePage from "./pages/HomePage";
 import KelasPage from "./pages/KelasPage";
-import TestimonialPage from "./pages/KnowledgePage";
+import KnowledgePage from "./pages/KnowledgePage";
 import FaqPage from "./pages/FaqPage";
 import AboutUsPage from "./pages/AboutUs";
 import Scan from "./pages/Scan";
@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/kelas" element={<KelasPage />} />
-          <Route path="/testimonial" element={<TestimonialPage />} />
+          <Route path="/knowledge" element={<KnowledgePage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
 
