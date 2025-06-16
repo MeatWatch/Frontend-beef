@@ -143,6 +143,25 @@ Specify your project's license (e.g., MIT, Apache 2.0).
 
 ---
 
+## ** Endpoint Machine Learning **  
+ ```sh
+https://web-production-049b.up.railway.app
+ ```
+description:
+	Endpoint Machine Learning untuk melakukan prediksi gambar daging (misalnya: segar atau tidak).
+---
+
+## ** Endpoint Backend API **  
+ ```sh
+https://backend-meatwatch-production.up.railway.app
+ ```
+description:
+	Endpoint REST API untuk mengambil riwayat klasifikasi atau menyimpan hasil klasifikasi ke database dan mengambil data.
+---
+
+
+
+
 ### **📌 Note**  
 - Update `README.md` with project-specific details (e.g., purpose, screenshots).  
 - Include environment variables (if any) in a `.env.example` file.  
