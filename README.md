@@ -143,7 +143,7 @@ Specify your project's license (e.g., MIT, Apache 2.0).
 
 ---
 
-### ** Endpoint Machine Learning **  
+###  Endpoint Machine Learning   
  ```sh
 https://web-production-049b.up.railway.app
  ```
@@ -151,7 +151,7 @@ https://web-production-049b.up.railway.app
 	Endpoint Machine Learning untuk melakukan prediksi gambar daging (misalnya: segar atau tidak).
 ---
 
-### ** Endpoint Backend API **  
+###  Endpoint Backend API 
  ```sh
 https://backend-meatwatch-production.up.railway.app
  ```
