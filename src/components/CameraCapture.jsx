@@ -176,7 +176,7 @@ const CameraCapture = () => {
       }
 
       const response = await axios.post(
-        "https://backend-meatwatch-production.up.railway.app/predict",
+        "https://web-production-049b.up.railway.app/predict",
         formData,
         {
           headers: {
